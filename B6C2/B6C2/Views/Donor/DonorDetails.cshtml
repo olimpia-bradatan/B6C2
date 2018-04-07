@@ -1,0 +1,75 @@
+﻿@model B6C2.Donor
+
+@{
+    ViewBag.Title = "DonorDetails";
+}
+
+<h2>Details of the donor model => model.firstName</h2>
+
+<div>
+    <h4>Donor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.firstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.birthDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.birthDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Blood.group)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Blood.group)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Blood.RH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Blood.RH)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "DonorEdit", new { id = Model.idDonor }) |
+    @Html.ActionLink("Back to Donors' List", "DonorIndex")
+</p>

@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ISSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="idRole" Type="nvarchar" MaxLength="128" />
+    <Property Name="firstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="lastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="birthDay" Type="datetime" Nullable="false" />
+    <Property Name="cardNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="cnp" Type="nvarchar" MaxLength="13" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRole">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Blood">
+    <Key>
+      <PropertyRef Name="idBlood" />
+    </Key>
+    <Property Name="idBlood" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="group" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="RH" Type="varchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bloodResource">
+    <Key>
+      <PropertyRef Name="idCenter" />
+      <PropertyRef Name="idBlood" />
+    </Key>
+    <Property Name="quantity" Type="int" Nullable="false" />
+    <Property Name="idCenter" Type="int" Nullable="false" />
+    <Property Name="idBlood" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="centerEmployee">
+    <Key>
+      <PropertyRef Name="idEmployee" />
+    </Key>
+    <Property Name="idEmployee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCenter" Type="int" />
+    <Property Name="firstName" Type="varchar" MaxLength="20" />
+    <Property Name="lastName" Type="varchar" MaxLength="20" />
+    <Property Name="email" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="donationCenter">
+    <Key>
+      <PropertyRef Name="idCenter" />
+    </Key>
+    <Property Name="idCenter" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Donor">
+    <Key>
+      <PropertyRef Name="idDonor" />
+    </Key>
+    <Property Name="idDonor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="birthDate" Type="date" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="phoneNumber" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="idBlood" Type="int" />
+    <Property Name="idCenter" Type="int" />
+  </EntityType>
+  <EntityType Name="Hospital">
+    <Key>
+      <PropertyRef Name="idHospital" />
+    </Key>
+    <Property Name="idHospital" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Medic">
+    <Key>
+      <PropertyRef Name="idMedic" />
+    </Key>
+    <Property Name="idMedic" Type="int" Nullable="false" />
+    <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="idHospital" Type="int" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="idPatient" />
+    </Key>
+    <Property Name="idPatient" Type="int" Nullable="false" />
+    <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="group" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="RH" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="idMedic" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="idCenter" />
+      <PropertyRef Name="idBlood" />
+      <PropertyRef Name="idHospital" />
+    </Key>
+    <Property Name="quantity" Type="int" Nullable="false" />
+    <Property Name="idCenter" Type="int" Nullable="false" />
+    <Property Name="idBlood" Type="int" Nullable="false" />
+    <Property Name="idHospital" Type="int" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__AspNetUse__idRol__41EDCAC5">
+    <End Role="AspNetRole" Type="Self.AspNetRole" Multiplicity="0..1" />
+    <End Role="AspNetUser" Type="Self.AspNetUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRole">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUser">
+        <PropertyRef Name="idRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bloodReso__idBlo__2FCF1A8A">
+    <End Role="Blood" Type="Self.Blood" Multiplicity="1" />
+    <End Role="bloodResource" Type="Self.bloodResource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Blood">
+        <PropertyRef Name="idBlood" />
+      </Principal>
+      <Dependent Role="bloodResource">
+        <PropertyRef Name="idBlood" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bloodReso__idCen__2EDAF651">
+    <End Role="donationCenter" Type="Self.donationCenter" Multiplicity="1" />
+    <End Role="bloodResource" Type="Self.bloodResource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="donationCenter">
+        <PropertyRef Name="idCenter" />
+      </Principal>
+      <Dependent Role="bloodResource">
+        <PropertyRef Name="idCenter" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__centerEmp__idCen__5D95E53A">
+    <End Role="donationCenter" Type="Self.donationCenter" Multiplicity="0..1" />
+    <End Role="centerEmployee" Type="Self.centerEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="donationCenter">
+        <PropertyRef Name="idCenter" />
+      </Principal>
+      <Dependent Role="centerEmployee">
+        <PropertyRef Name="idCenter" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Donor__idBlood__5AB9788F">
+    <End Role="Blood" Type="Self.Blood" Multiplicity="0..1" />
+    <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Blood">
+        <PropertyRef Name="idBlood" />
+      </Principal>
+      <Dependent Role="Donor">
+        <PropertyRef Name="idBlood" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Donor__idCenter__59C55456">
+    <End Role="donationCenter" Type="Self.donationCenter" Multiplicity="0..1" />
+    <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="donationCenter">
+        <PropertyRef Name="idCenter" />
+      </Principal>
+      <Dependent Role="Donor">
+        <PropertyRef Name="idCenter" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Medic__idHospita__3587F3E0">
+    <End Role="Hospital" Type="Self.Hospital" Multiplicity="0..1" />
+    <End Role="Medic" Type="Self.Medic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hospital">
+        <PropertyRef Name="idHospital" />
+      </Principal>
+      <Dependent Role="Medic">
+        <PropertyRef Name="idHospital" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Patient__idMedic__3864608B">
+    <End Role="Medic" Type="Self.Medic" Multiplicity="0..1" />
+    <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medic">
+        <PropertyRef Name="idMedic" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="idMedic" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Transacti__idBlo__3C34F16F">
+    <End Role="Blood" Type="Self.Blood" Multiplicity="1" />
+    <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Blood">
+        <PropertyRef Name="idBlood" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="idBlood" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Transacti__idCen__3B40CD36">
+    <End Role="donationCenter" Type="Self.donationCenter" Multiplicity="1" />
+    <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="donationCenter">
+        <PropertyRef Name="idCenter" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="idCenter" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Transacti__idHos__3D2915A8">
+    <End Role="Hospital" Type="Self.Hospital" Multiplicity="1" />
+    <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hospital">
+        <PropertyRef Name="idHospital" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="idHospital" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaim_dbo_AspNetUser_UserId">
+    <End Role="AspNetUser" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaim" Type="Self.AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogin_dbo_AspNetUser_UserId">
+    <End Role="AspNetUser" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogin" Type="Self.AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRole_dbo_AspNetRole_RoleId">
+    <End Role="AspNetRole" Type="Self.AspNetRole" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRole" Type="Self.AspNetUserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRole">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRole_dbo_AspNetUser_UserId">
+    <End Role="AspNetUser" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRole" Type="Self.AspNetUserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRole">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ISSModelStoreContainer">
+    <EntitySet Name="AspNetRole" EntityType="Self.AspNetRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUser" EntityType="Self.AspNetUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaim" EntityType="Self.AspNetUserClaim" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogin" EntityType="Self.AspNetUserLogin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRole" EntityType="Self.AspNetUserRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Blood" EntityType="Self.Blood" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="bloodResource" EntityType="Self.bloodResource" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="centerEmployee" EntityType="Self.centerEmployee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="donationCenter" EntityType="Self.donationCenter" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Donor" EntityType="Self.Donor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hospital" EntityType="Self.Hospital" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Medic" EntityType="Self.Medic" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__AspNetUse__idRol__41EDCAC5" Association="Self.FK__AspNetUse__idRol__41EDCAC5">
+      <End Role="AspNetRole" EntitySet="AspNetRole" />
+      <End Role="AspNetUser" EntitySet="AspNetUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bloodReso__idBlo__2FCF1A8A" Association="Self.FK__bloodReso__idBlo__2FCF1A8A">
+      <End Role="Blood" EntitySet="Blood" />
+      <End Role="bloodResource" EntitySet="bloodResource" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bloodReso__idCen__2EDAF651" Association="Self.FK__bloodReso__idCen__2EDAF651">
+      <End Role="donationCenter" EntitySet="donationCenter" />
+      <End Role="bloodResource" EntitySet="bloodResource" />
+    </AssociationSet>
+    <AssociationSet Name="FK__centerEmp__idCen__5D95E53A" Association="Self.FK__centerEmp__idCen__5D95E53A">
+      <End Role="donationCenter" EntitySet="donationCenter" />
+      <End Role="centerEmployee" EntitySet="centerEmployee" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Donor__idBlood__5AB9788F" Association="Self.FK__Donor__idBlood__5AB9788F">
+      <End Role="Blood" EntitySet="Blood" />
+      <End Role="Donor" EntitySet="Donor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Donor__idCenter__59C55456" Association="Self.FK__Donor__idCenter__59C55456">
+      <End Role="donationCenter" EntitySet="donationCenter" />
+      <End Role="Donor" EntitySet="Donor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Medic__idHospita__3587F3E0" Association="Self.FK__Medic__idHospita__3587F3E0">
+      <End Role="Hospital" EntitySet="Hospital" />
+      <End Role="Medic" EntitySet="Medic" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Patient__idMedic__3864608B" Association="Self.FK__Patient__idMedic__3864608B">
+      <End Role="Medic" EntitySet="Medic" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transacti__idBlo__3C34F16F" Association="Self.FK__Transacti__idBlo__3C34F16F">
+      <End Role="Blood" EntitySet="Blood" />
+      <End Role="Transaction" EntitySet="Transaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transacti__idCen__3B40CD36" Association="Self.FK__Transacti__idCen__3B40CD36">
+      <End Role="donationCenter" EntitySet="donationCenter" />
+      <End Role="Transaction" EntitySet="Transaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transacti__idHos__3D2915A8" Association="Self.FK__Transacti__idHos__3D2915A8">
+      <End Role="Hospital" EntitySet="Hospital" />
+      <End Role="Transaction" EntitySet="Transaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaim_dbo_AspNetUser_UserId" Association="Self.FK_dbo_AspNetUserClaim_dbo_AspNetUser_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUser" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaim" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogin_dbo_AspNetUser_UserId" Association="Self.FK_dbo_AspNetUserLogin_dbo_AspNetUser_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUser" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogin" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRole_dbo_AspNetRole_RoleId" Association="Self.FK_dbo_AspNetUserRole_dbo_AspNetRole_RoleId">
+      <End Role="AspNetRole" EntitySet="AspNetRole" />
+      <End Role="AspNetUserRole" EntitySet="AspNetUserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRole_dbo_AspNetUser_UserId" Association="Self.FK_dbo_AspNetUserRole_dbo_AspNetUser_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUser" />
+      <End Role="AspNetUserRole" EntitySet="AspNetUserRole" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
