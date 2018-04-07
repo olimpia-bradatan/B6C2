@@ -1,6 +1,6 @@
 
 CREATE TABLE [dbo].[Hospital] (
-    [idHospital] INT           NOT NULL,
+    [idHospital] INT        IDENTITY (1, 1)   NOT NULL,
     [name]       VARCHAR (100) NOT NULL,
     [address]    VARCHAR (250) NOT NULL,
     PRIMARY KEY CLUSTERED ([idHospital] ASC)
@@ -88,7 +88,7 @@ CREATE TABLE [dbo].[centerEmployee] (
 
 
 CREATE TABLE [dbo].[Medic] (
-    [idMedic]    INT          NOT NULL,
+    [idMedic]    INT      IDENTITY (1, 1)    NOT NULL,
     [firstName]  VARCHAR (50) NOT NULL,
     [lastName]   VARCHAR (50) NOT NULL,
     [idHospital] INT          NULL,
@@ -99,7 +99,7 @@ CREATE TABLE [dbo].[Medic] (
 
 
 CREATE TABLE [dbo].[Patient] (
-    [idPatient] INT          NOT NULL,
+    [idPatient] INT       IDENTITY (1, 1)   NOT NULL,
     [firstName] VARCHAR (50) NOT NULL,
     [lastName]  VARCHAR (50) NOT NULL,
     [group]     VARCHAR (3)  NOT NULL,
@@ -112,11 +112,13 @@ CREATE TABLE [dbo].[Patient] (
 
 
 CREATE TABLE [dbo].[Transaction] (
+	[idTransaction] INT IDENTITY (1, 1) NOT NULL,
     [quantity]   INT           NOT NULL,
     [idCenter]   INT           NOT NULL,
     [idBlood]    INT           NOT NULL,
     [idHospital] INT           NOT NULL,
     [status]     VARCHAR (250) NOT NULL,
+	PRIMARY KEY CLUSTERED ([idTransaction] ASC),
     FOREIGN KEY ([idCenter]) REFERENCES [dbo].[donationCenter] ([idCenter]),
     FOREIGN KEY ([idBlood]) REFERENCES [dbo].[Blood] ([idBlood]),
     FOREIGN KEY ([idHospital]) REFERENCES [dbo].[Hospital] ([idHospital])
