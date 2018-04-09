@@ -30,7 +30,7 @@
     <Property Name="lastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="birthDay" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="cardNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="cnp" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cnp" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="AspNetRole" Relationship="Self.FK__AspNetUse__idRol__41EDCAC5" FromRole="AspNetUser" ToRole="AspNetRole" />
     <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaim_dbo_AspNetUser_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
     <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogin_dbo_AspNetUser_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
@@ -163,9 +163,7 @@
   </EntityType>
   <EntityType Name="Transaction">
     <Key>
-      <PropertyRef Name="idCenter" />
-      <PropertyRef Name="idBlood" />
-      <PropertyRef Name="idHospital" />
+      <PropertyRef Name="idTransaction" />
     </Key>
     <Property Name="quantity" Type="Int32" Nullable="false" />
     <Property Name="idCenter" Type="Int32" Nullable="false" />
@@ -175,6 +173,7 @@
     <NavigationProperty Name="Blood" Relationship="Self.FK__Transacti__idBlo__3C34F16F" FromRole="Transaction" ToRole="Blood" />
     <NavigationProperty Name="donationCenter" Relationship="Self.FK__Transacti__idCen__3B40CD36" FromRole="Transaction" ToRole="donationCenter" />
     <NavigationProperty Name="Hospital" Relationship="Self.FK__Transacti__idHos__3D2915A8" FromRole="Transaction" ToRole="Hospital" />
+    <Property Name="idTransaction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
   <Association Name="FK__AspNetUse__idRol__41EDCAC5">
     <End Role="AspNetRole" Type="Self.AspNetRole" Multiplicity="0..1" />

@@ -16,7 +16,6 @@ namespace B6C2
     public partial class Donor
     {
         public int idDonor { get; set; }
-
         [Required]
         [Display(Name = "First Name")]
         public string firstName { get; set; }
@@ -26,12 +25,12 @@ namespace B6C2
         public string lastName { get; set; }
 
         [Required]
-        [Display(Name = "Birth date")]
+        [Display(Name = "Date of birth")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime birthDate { get; set; }
 
-        [Display(Name = "Personal Email")]
+        [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
         public string email { get; set; }
 
@@ -48,3 +47,4 @@ namespace B6C2
         public virtual Blood Blood { get; set; }
     }
 }
+

@@ -150,6 +150,7 @@
     <EntitySetMapping Name="Transactions">
       <EntityTypeMapping TypeName="ISSModel.Transaction">
         <MappingFragment StoreEntitySet="Transaction">
+          <ScalarProperty Name="idTransaction" ColumnName="idTransaction" />
           <ScalarProperty Name="quantity" ColumnName="quantity" />
           <ScalarProperty Name="idCenter" ColumnName="idCenter" />
           <ScalarProperty Name="idBlood" ColumnName="idBlood" />

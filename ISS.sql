@@ -1,4 +1,3 @@
-
 CREATE TABLE [dbo].[Hospital] (
     [idHospital] INT        IDENTITY (1, 1)   NOT NULL,
     [name]       VARCHAR (100) NOT NULL,
@@ -56,11 +55,6 @@ CREATE TABLE [dbo].[Donor] (
 	FOREIGN KEY ([idBlood]) REFERENCES [dbo].[Blood] ([idBlood])
 );
 
-
-
-
-
-
 CREATE TABLE [dbo].[bloodResource] (
     [quantity] INT NOT NULL,
     [idCenter] INT NOT NULL,
@@ -69,9 +63,6 @@ CREATE TABLE [dbo].[bloodResource] (
     FOREIGN KEY ([idCenter]) REFERENCES [dbo].[donationCenter] ([idCenter]),
     FOREIGN KEY ([idBlood]) REFERENCES [dbo].[Blood] ([idBlood])
 );
-
-
-
 
 CREATE TABLE [dbo].[centerEmployee] (
     [idEmployee] INT IDENTITY (1, 1) NOT NULL,
@@ -83,10 +74,6 @@ CREATE TABLE [dbo].[centerEmployee] (
     FOREIGN KEY ([idCenter]) REFERENCES [dbo].[donationCenter] ([idCenter])
 );
 
-
-
-
-
 CREATE TABLE [dbo].[Medic] (
     [idMedic]    INT      IDENTITY (1, 1)    NOT NULL,
     [firstName]  VARCHAR (50) NOT NULL,
@@ -95,8 +82,6 @@ CREATE TABLE [dbo].[Medic] (
     PRIMARY KEY CLUSTERED ([idMedic] ASC),
     FOREIGN KEY ([idHospital]) REFERENCES [dbo].[Hospital] ([idHospital])
 );
-
-
 
 CREATE TABLE [dbo].[Patient] (
     [idPatient] INT       IDENTITY (1, 1)   NOT NULL,
@@ -108,8 +93,6 @@ CREATE TABLE [dbo].[Patient] (
     PRIMARY KEY CLUSTERED ([idPatient] ASC),
     FOREIGN KEY ([idMedic]) REFERENCES [dbo].[Medic] ([idMedic])
 );
-
-
 
 CREATE TABLE [dbo].[Transaction] (
 	[idTransaction] INT IDENTITY (1, 1) NOT NULL,
@@ -123,8 +106,6 @@ CREATE TABLE [dbo].[Transaction] (
     FOREIGN KEY ([idBlood]) REFERENCES [dbo].[Blood] ([idBlood]),
     FOREIGN KEY ([idHospital]) REFERENCES [dbo].[Hospital] ([idHospital])
 );
-
-
 
 CREATE TABLE [dbo].[AspNetRole] (
     [Id]   NVARCHAR (128) NOT NULL,
@@ -155,20 +136,10 @@ CREATE TABLE [dbo].[AspNetUser] (
     [lastName]             NVARCHAR (100) NOT NULL,
     [birthDay]             DATETIME       NOT NULL,
     [cardNumber]           NVARCHAR (20)  NOT NULL,
-    [cnp]                  NVARCHAR (13)  NOT NULL,
+    [cnp]                  NVARCHAR (13)  NULL,
     CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC),
 	FOREIGN KEY ([idRole]) REFERENCES [dbo].[AspNetRole] ([Id])
 );
-
-
-
-
-
-
-
-
-
-
 
 CREATE TABLE [dbo].[AspNetUserClaim] (
     [Id]         INT            IDENTITY (1, 1) NOT NULL,
@@ -178,7 +149,6 @@ CREATE TABLE [dbo].[AspNetUserClaim] (
     CONSTRAINT [PK_dbo.AspNetUserClaims] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUser] ([Id]) ON DELETE CASCADE
 );
-
 
 GO
 CREATE NONCLUSTERED INDEX [IX_UserId]
@@ -198,8 +168,6 @@ GO
 CREATE NONCLUSTERED INDEX [IX_UserId]
     ON [dbo].[AspNetUserLogin]([UserId] ASC);
 
-
-
 CREATE TABLE [dbo].[AspNetUserRole] (
     [UserId] NVARCHAR (128) NOT NULL,
     [RoleId] NVARCHAR (128) NOT NULL,
@@ -208,25 +176,14 @@ CREATE TABLE [dbo].[AspNetUserRole] (
     CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUser] ([Id]) ON DELETE CASCADE
 );
 
-
-
-
-
-
-
 GO
 CREATE NONCLUSTERED INDEX [IX_UserId]
     ON [dbo].[AspNetUserRole]([UserId] ASC);
-
 
 GO
 CREATE NONCLUSTERED INDEX [IX_RoleId]
     ON [dbo].[AspNetUserRole]([RoleId] ASC);
 
-
-
-
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex]
     ON [dbo].[AspNetUser]([UserName] ASC);
-

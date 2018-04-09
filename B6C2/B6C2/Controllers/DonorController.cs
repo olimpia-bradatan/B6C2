@@ -105,7 +105,6 @@ namespace B6C2.Controllers
             {
                 return View();
             }
-            return View();
         }
 
     }
