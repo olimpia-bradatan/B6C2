@@ -14,12 +14,12 @@ namespace B6C2
     
     public partial class Transaction
     {
+        public int idTransaction { get; set; }
         public int quantity { get; set; }
         public int idCenter { get; set; }
         public int idBlood { get; set; }
         public int idHospital { get; set; }
         public string status { get; set; }
-        public int idTransaction { get; set; }
     
         public virtual Blood Blood { get; set; }
         public virtual donationCenter donationCenter { get; set; }

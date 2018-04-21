@@ -9,12 +9,12 @@ namespace B6C2.Models
     {
         public bool Equals(Donor x, Donor y)
         {
-            return x.firstName.Equals(y.firstName) && x.lastName.Equals(y.lastName) && x.birthDate.Equals(y.birthDate);
+            return x.cnp.Equals(y.cnp);
         }
 
         public int GetHashCode(Donor obj)
         {
-            return string.Format("{0}{1}{2}", obj.idDonor, obj.firstName, obj.lastName).GetHashCode();
+            return string.Format("{0}{1}{2}", obj.cnp, obj.firstName, obj.lastName).GetHashCode();
         } 
     }
 }

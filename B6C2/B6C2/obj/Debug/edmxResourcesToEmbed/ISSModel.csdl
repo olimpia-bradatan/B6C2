@@ -4,36 +4,35 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK__AspNetUse__idRol__41EDCAC5" FromRole="AspNetRole" ToRole="AspNetUser" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK__AspNetUse__idRol__7BE56230" FromRole="AspNetRole" ToRole="AspNetUser" />
     <NavigationProperty Name="AspNetUsers1" Relationship="Self.AspNetUserRole" FromRole="AspNetRole" ToRole="AspNetUser" />
   </EntityType>
   <EntityType Name="AspNetUser">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" />
     <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
-    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="idRole" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="firstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="lastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="birthDay" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="cardNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LockoutEnabled" Type="Boolean" />
+    <Property Name="AccessFailedCount" Type="Int32" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="idRole" Type="Int32" />
+    <Property Name="firstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="lastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="birthDay" Type="DateTime" Precision="3" />
+    <Property Name="cardNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="cnp" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="AspNetRole" Relationship="Self.FK__AspNetUse__idRol__41EDCAC5" FromRole="AspNetUser" ToRole="AspNetRole" />
-    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaim_dbo_AspNetUser_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
-    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogin_dbo_AspNetUser_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="AspNetRole" Relationship="Self.FK__AspNetUse__idRol__7BE56230" FromRole="AspNetUser" ToRole="AspNetRole" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
     <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRole" FromRole="AspNetUser" ToRole="AspNetRole" />
   </EntityType>
   <EntityType Name="AspNetUserClaim">
@@ -41,10 +40,10 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
     <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaim_dbo_AspNetUser_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
   </EntityType>
   <EntityType Name="AspNetUserLogin">
     <Key>
@@ -54,8 +53,8 @@
     </Key>
     <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogin_dbo_AspNetUser_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
   </EntityType>
   <EntityType Name="Blood">
     <Key>
@@ -64,9 +63,9 @@
     <Property Name="idBlood" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="group" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="RH" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="bloodResources" Relationship="Self.FK__bloodReso__idBlo__2FCF1A8A" FromRole="Blood" ToRole="bloodResource" />
-    <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__idBlo__3C34F16F" FromRole="Blood" ToRole="Transaction" />
-    <NavigationProperty Name="Donors" Relationship="ISSModel.FK__Donor__idBlood__5AB9788F" FromRole="Blood" ToRole="Donor" />
+    <NavigationProperty Name="bloodResources" Relationship="Self.FK__bloodReso__idBlo__69C6B1F5" FromRole="Blood" ToRole="bloodResource" />
+    <NavigationProperty Name="Donors" Relationship="Self.FK__Donor__idBlood__65F62111" FromRole="Blood" ToRole="Donor" />
+    <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__idBlo__762C88DA" FromRole="Blood" ToRole="Transaction" />
   </EntityType>
   <EntityType Name="bloodResource">
     <Key>
@@ -76,8 +75,8 @@
     <Property Name="quantity" Type="Int32" Nullable="false" />
     <Property Name="idCenter" Type="Int32" Nullable="false" />
     <Property Name="idBlood" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Blood" Relationship="Self.FK__bloodReso__idBlo__2FCF1A8A" FromRole="bloodResource" ToRole="Blood" />
-    <NavigationProperty Name="donationCenter" Relationship="Self.FK__bloodReso__idCen__2EDAF651" FromRole="bloodResource" ToRole="donationCenter" />
+    <NavigationProperty Name="Blood" Relationship="Self.FK__bloodReso__idBlo__69C6B1F5" FromRole="bloodResource" ToRole="Blood" />
+    <NavigationProperty Name="donationCenter" Relationship="Self.FK__bloodReso__idCen__68D28DBC" FromRole="bloodResource" ToRole="donationCenter" />
   </EntityType>
   <EntityType Name="centerEmployee">
     <Key>
@@ -85,10 +84,10 @@
     </Key>
     <Property Name="idEmployee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idCenter" Type="Int32" />
-    <NavigationProperty Name="donationCenter" Relationship="Self.FK__centerEmp__idCen__32AB8735" FromRole="centerEmployee" ToRole="donationCenter" />
     <Property Name="firstName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="lastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="donationCenter" Relationship="Self.FK__centerEmp__idCen__6CA31EA0" FromRole="centerEmployee" ToRole="donationCenter" />
   </EntityType>
   <EntityType Name="donationCenter">
     <Key>
@@ -97,59 +96,59 @@
     <Property Name="idCenter" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="bloodResources" Relationship="Self.FK__bloodReso__idCen__2EDAF651" FromRole="donationCenter" ToRole="bloodResource" />
-    <NavigationProperty Name="centerEmployees" Relationship="Self.FK__centerEmp__idCen__32AB8735" FromRole="donationCenter" ToRole="centerEmployee" />
-    <NavigationProperty Name="Donors" Relationship="Self.FK__Donor__idCenter__2BFE89A6" FromRole="donationCenter" ToRole="Donor" />
-    <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__idCen__3B40CD36" FromRole="donationCenter" ToRole="Transaction" />
+    <NavigationProperty Name="bloodResources" Relationship="Self.FK__bloodReso__idCen__68D28DBC" FromRole="donationCenter" ToRole="bloodResource" />
+    <NavigationProperty Name="centerEmployees" Relationship="Self.FK__centerEmp__idCen__6CA31EA0" FromRole="donationCenter" ToRole="centerEmployee" />
+    <NavigationProperty Name="Donors" Relationship="Self.FK__Donor__idCenter__6501FCD8" FromRole="donationCenter" ToRole="Donor" />
+    <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__idCen__753864A1" FromRole="donationCenter" ToRole="Transaction" />
   </EntityType>
   <EntityType Name="Donor">
     <Key>
-      <PropertyRef Name="idDonor" />
+      <PropertyRef Name="cnp" />
     </Key>
-    <Property Name="idDonor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cnp" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="birthDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="phoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="idCenter" Type="Int32" />
-    <NavigationProperty Name="donationCenter" Relationship="Self.FK__Donor__idCenter__2BFE89A6" FromRole="Donor" ToRole="donationCenter" />
     <Property Name="idBlood" Type="Int32" />
-    <NavigationProperty Name="Blood" Relationship="ISSModel.FK__Donor__idBlood__5AB9788F" FromRole="Donor" ToRole="Blood" />
-    <Property Name="address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="idCenter" Type="Int32" />
+    <NavigationProperty Name="Blood" Relationship="Self.FK__Donor__idBlood__65F62111" FromRole="Donor" ToRole="Blood" />
+    <NavigationProperty Name="donationCenter" Relationship="Self.FK__Donor__idCenter__6501FCD8" FromRole="Donor" ToRole="donationCenter" />
   </EntityType>
   <EntityType Name="Hospital">
     <Key>
       <PropertyRef Name="idHospital" />
     </Key>
-    <Property Name="idHospital" Type="Int32" Nullable="false" />
+    <Property Name="idHospital" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Medics" Relationship="Self.FK__Medic__idHospita__3587F3E0" FromRole="Hospital" ToRole="Medic" />
-    <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__idHos__3D2915A8" FromRole="Hospital" ToRole="Transaction" />
+    <NavigationProperty Name="Medics" Relationship="Self.FK__Medic__idHospita__6F7F8B4B" FromRole="Hospital" ToRole="Medic" />
+    <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__idHos__7720AD13" FromRole="Hospital" ToRole="Transaction" />
   </EntityType>
   <EntityType Name="Medic">
     <Key>
       <PropertyRef Name="idMedic" />
     </Key>
-    <Property Name="idMedic" Type="Int32" Nullable="false" />
+    <Property Name="idMedic" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="idHospital" Type="Int32" />
-    <NavigationProperty Name="Hospital" Relationship="Self.FK__Medic__idHospita__3587F3E0" FromRole="Medic" ToRole="Hospital" />
-    <NavigationProperty Name="Patients" Relationship="Self.FK__Patient__idMedic__3864608B" FromRole="Medic" ToRole="Patient" />
+    <NavigationProperty Name="Hospital" Relationship="Self.FK__Medic__idHospita__6F7F8B4B" FromRole="Medic" ToRole="Hospital" />
+    <NavigationProperty Name="Patients" Relationship="Self.FK__Patient__idMedic__725BF7F6" FromRole="Medic" ToRole="Patient" />
   </EntityType>
   <EntityType Name="Patient">
     <Key>
       <PropertyRef Name="idPatient" />
     </Key>
-    <Property Name="idPatient" Type="Int32" Nullable="false" />
+    <Property Name="idPatient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="group" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="RH" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="idMedic" Type="Int32" />
-    <NavigationProperty Name="Medic" Relationship="Self.FK__Patient__idMedic__3864608B" FromRole="Patient" ToRole="Medic" />
+    <NavigationProperty Name="Medic" Relationship="Self.FK__Patient__idMedic__725BF7F6" FromRole="Patient" ToRole="Medic" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -165,17 +164,17 @@
     <Key>
       <PropertyRef Name="idTransaction" />
     </Key>
+    <Property Name="idTransaction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="quantity" Type="Int32" Nullable="false" />
     <Property Name="idCenter" Type="Int32" Nullable="false" />
     <Property Name="idBlood" Type="Int32" Nullable="false" />
     <Property Name="idHospital" Type="Int32" Nullable="false" />
     <Property Name="status" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Blood" Relationship="Self.FK__Transacti__idBlo__3C34F16F" FromRole="Transaction" ToRole="Blood" />
-    <NavigationProperty Name="donationCenter" Relationship="Self.FK__Transacti__idCen__3B40CD36" FromRole="Transaction" ToRole="donationCenter" />
-    <NavigationProperty Name="Hospital" Relationship="Self.FK__Transacti__idHos__3D2915A8" FromRole="Transaction" ToRole="Hospital" />
-    <Property Name="idTransaction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Blood" Relationship="Self.FK__Transacti__idBlo__762C88DA" FromRole="Transaction" ToRole="Blood" />
+    <NavigationProperty Name="donationCenter" Relationship="Self.FK__Transacti__idCen__753864A1" FromRole="Transaction" ToRole="donationCenter" />
+    <NavigationProperty Name="Hospital" Relationship="Self.FK__Transacti__idHos__7720AD13" FromRole="Transaction" ToRole="Hospital" />
   </EntityType>
-  <Association Name="FK__AspNetUse__idRol__41EDCAC5">
+  <Association Name="FK__AspNetUse__idRol__7BE56230">
     <End Role="AspNetRole" Type="Self.AspNetRole" Multiplicity="0..1" />
     <End Role="AspNetUser" Type="Self.AspNetUser" Multiplicity="*" />
     <ReferentialConstraint>
@@ -187,7 +186,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_dbo_AspNetUserClaim_dbo_AspNetUser_UserId">
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUser" Type="Self.AspNetUser" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -201,7 +200,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_dbo_AspNetUserLogin_dbo_AspNetUser_UserId">
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
     <End Role="AspNetUser" Type="Self.AspNetUser" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -215,7 +214,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__bloodReso__idBlo__2FCF1A8A">
+  <Association Name="FK__bloodReso__idBlo__69C6B1F5">
     <End Role="Blood" Type="Self.Blood" Multiplicity="1" />
     <End Role="bloodResource" Type="Self.bloodResource" Multiplicity="*" />
     <ReferentialConstraint>
@@ -227,7 +226,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Transacti__idBlo__3C34F16F">
+  <Association Name="FK__Donor__idBlood__65F62111">
+    <End Role="Blood" Type="Self.Blood" Multiplicity="0..1" />
+    <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Blood">
+        <PropertyRef Name="idBlood" />
+      </Principal>
+      <Dependent Role="Donor">
+        <PropertyRef Name="idBlood" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Transacti__idBlo__762C88DA">
     <End Role="Blood" Type="Self.Blood" Multiplicity="1" />
     <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
     <ReferentialConstraint>
@@ -239,7 +250,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__bloodReso__idCen__2EDAF651">
+  <Association Name="FK__bloodReso__idCen__68D28DBC">
     <End Role="donationCenter" Type="Self.donationCenter" Multiplicity="1" />
     <End Role="bloodResource" Type="Self.bloodResource" Multiplicity="*" />
     <ReferentialConstraint>
@@ -251,7 +262,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__centerEmp__idCen__32AB8735">
+  <Association Name="FK__centerEmp__idCen__6CA31EA0">
     <End Role="donationCenter" Type="Self.donationCenter" Multiplicity="0..1" />
     <End Role="centerEmployee" Type="Self.centerEmployee" Multiplicity="*" />
     <ReferentialConstraint>
@@ -263,7 +274,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Donor__idCenter__2BFE89A6">
+  <Association Name="FK__Donor__idCenter__6501FCD8">
     <End Role="donationCenter" Type="Self.donationCenter" Multiplicity="0..1" />
     <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
     <ReferentialConstraint>
@@ -275,7 +286,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Transacti__idCen__3B40CD36">
+  <Association Name="FK__Transacti__idCen__753864A1">
     <End Role="donationCenter" Type="Self.donationCenter" Multiplicity="1" />
     <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
     <ReferentialConstraint>
@@ -287,7 +298,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Medic__idHospita__3587F3E0">
+  <Association Name="FK__Medic__idHospita__6F7F8B4B">
     <End Role="Hospital" Type="Self.Hospital" Multiplicity="0..1" />
     <End Role="Medic" Type="Self.Medic" Multiplicity="*" />
     <ReferentialConstraint>
@@ -299,7 +310,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Transacti__idHos__3D2915A8">
+  <Association Name="FK__Transacti__idHos__7720AD13">
     <End Role="Hospital" Type="Self.Hospital" Multiplicity="1" />
     <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
     <ReferentialConstraint>
@@ -311,7 +322,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Patient__idMedic__3864608B">
+  <Association Name="FK__Patient__idMedic__725BF7F6">
     <End Role="Medic" Type="Self.Medic" Multiplicity="0..1" />
     <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
     <ReferentialConstraint>
@@ -342,51 +353,55 @@
     <EntitySet Name="Patients" EntityType="Self.Patient" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Transactions" EntityType="Self.Transaction" />
-    <AssociationSet Name="FK__AspNetUse__idRol__41EDCAC5" Association="Self.FK__AspNetUse__idRol__41EDCAC5">
+    <AssociationSet Name="FK__AspNetUse__idRol__7BE56230" Association="Self.FK__AspNetUse__idRol__7BE56230">
       <End Role="AspNetRole" EntitySet="AspNetRoles" />
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
     </AssociationSet>
-    <AssociationSet Name="FK_dbo_AspNetUserClaim_dbo_AspNetUser_UserId" Association="Self.FK_dbo_AspNetUserClaim_dbo_AspNetUser_UserId">
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
     </AssociationSet>
-    <AssociationSet Name="FK_dbo_AspNetUserLogin_dbo_AspNetUser_UserId" Association="Self.FK_dbo_AspNetUserLogin_dbo_AspNetUser_UserId">
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
       <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
     </AssociationSet>
-    <AssociationSet Name="FK__bloodReso__idBlo__2FCF1A8A" Association="Self.FK__bloodReso__idBlo__2FCF1A8A">
+    <AssociationSet Name="FK__bloodReso__idBlo__69C6B1F5" Association="Self.FK__bloodReso__idBlo__69C6B1F5">
       <End Role="Blood" EntitySet="Bloods" />
       <End Role="bloodResource" EntitySet="bloodResources" />
     </AssociationSet>
-    <AssociationSet Name="FK__Transacti__idBlo__3C34F16F" Association="Self.FK__Transacti__idBlo__3C34F16F">
+    <AssociationSet Name="FK__Donor__idBlood__65F62111" Association="Self.FK__Donor__idBlood__65F62111">
+      <End Role="Blood" EntitySet="Bloods" />
+      <End Role="Donor" EntitySet="Donors" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transacti__idBlo__762C88DA" Association="Self.FK__Transacti__idBlo__762C88DA">
       <End Role="Blood" EntitySet="Bloods" />
       <End Role="Transaction" EntitySet="Transactions" />
     </AssociationSet>
-    <AssociationSet Name="FK__bloodReso__idCen__2EDAF651" Association="Self.FK__bloodReso__idCen__2EDAF651">
+    <AssociationSet Name="FK__bloodReso__idCen__68D28DBC" Association="Self.FK__bloodReso__idCen__68D28DBC">
       <End Role="donationCenter" EntitySet="donationCenters" />
       <End Role="bloodResource" EntitySet="bloodResources" />
     </AssociationSet>
-    <AssociationSet Name="FK__centerEmp__idCen__32AB8735" Association="Self.FK__centerEmp__idCen__32AB8735">
+    <AssociationSet Name="FK__centerEmp__idCen__6CA31EA0" Association="Self.FK__centerEmp__idCen__6CA31EA0">
       <End Role="donationCenter" EntitySet="donationCenters" />
       <End Role="centerEmployee" EntitySet="centerEmployees" />
     </AssociationSet>
-    <AssociationSet Name="FK__Donor__idCenter__2BFE89A6" Association="Self.FK__Donor__idCenter__2BFE89A6">
+    <AssociationSet Name="FK__Donor__idCenter__6501FCD8" Association="Self.FK__Donor__idCenter__6501FCD8">
       <End Role="donationCenter" EntitySet="donationCenters" />
       <End Role="Donor" EntitySet="Donors" />
     </AssociationSet>
-    <AssociationSet Name="FK__Transacti__idCen__3B40CD36" Association="Self.FK__Transacti__idCen__3B40CD36">
+    <AssociationSet Name="FK__Transacti__idCen__753864A1" Association="Self.FK__Transacti__idCen__753864A1">
       <End Role="donationCenter" EntitySet="donationCenters" />
       <End Role="Transaction" EntitySet="Transactions" />
     </AssociationSet>
-    <AssociationSet Name="FK__Medic__idHospita__3587F3E0" Association="Self.FK__Medic__idHospita__3587F3E0">
+    <AssociationSet Name="FK__Medic__idHospita__6F7F8B4B" Association="Self.FK__Medic__idHospita__6F7F8B4B">
       <End Role="Hospital" EntitySet="Hospitals" />
       <End Role="Medic" EntitySet="Medics" />
     </AssociationSet>
-    <AssociationSet Name="FK__Transacti__idHos__3D2915A8" Association="Self.FK__Transacti__idHos__3D2915A8">
+    <AssociationSet Name="FK__Transacti__idHos__7720AD13" Association="Self.FK__Transacti__idHos__7720AD13">
       <End Role="Hospital" EntitySet="Hospitals" />
       <End Role="Transaction" EntitySet="Transactions" />
     </AssociationSet>
-    <AssociationSet Name="FK__Patient__idMedic__3864608B" Association="Self.FK__Patient__idMedic__3864608B">
+    <AssociationSet Name="FK__Patient__idMedic__725BF7F6" Association="Self.FK__Patient__idMedic__725BF7F6">
       <End Role="Medic" EntitySet="Medics" />
       <End Role="Patient" EntitySet="Patients" />
     </AssociationSet>
@@ -394,21 +409,5 @@
       <End Role="AspNetRole" EntitySet="AspNetRoles" />
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
     </AssociationSet>
-    <AssociationSet Name="FK__Donor__idBlood__5AB9788F" Association="ISSModel.FK__Donor__idBlood__5AB9788F">
-      <End Role="Blood" EntitySet="Bloods" />
-      <End Role="Donor" EntitySet="Donors" />
-    </AssociationSet>
   </EntityContainer>
-  <Association Name="FK__Donor__idBlood__5AB9788F">
-    <End Type="ISSModel.Blood" Role="Blood" Multiplicity="0..1" />
-    <End Type="ISSModel.Donor" Role="Donor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Blood">
-        <PropertyRef Name="idBlood" />
-      </Principal>
-      <Dependent Role="Donor">
-        <PropertyRef Name="idBlood" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

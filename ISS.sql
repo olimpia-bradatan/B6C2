@@ -41,7 +41,7 @@ CREATE TABLE [dbo].[donationCenter] (
 );
 
 CREATE TABLE [dbo].[Donor] (
-    [idDonor]     INT          IDENTITY (1, 1) NOT NULL,
+    [cnp]     VARCHAR(14) NOT NULL,
     [firstName]   VARCHAR (50) NOT NULL,
     [lastName]    VARCHAR (50) NOT NULL,
     [birthDate]   DATE         NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE [dbo].[Donor] (
     [phoneNumber] VARCHAR (10) NOT NULL,
     [idBlood]     INT          NULL,
     [idCenter]    INT          NULL,
-    PRIMARY KEY CLUSTERED ([idDonor] ASC),
+    PRIMARY KEY CLUSTERED ([cnp] ASC),
     FOREIGN KEY ([idCenter]) REFERENCES [dbo].[donationCenter] ([idCenter]),
 	FOREIGN KEY ([idBlood]) REFERENCES [dbo].[Blood] ([idBlood])
 );
@@ -108,8 +108,8 @@ CREATE TABLE [dbo].[Transaction] (
 );
 
 CREATE TABLE [dbo].[AspNetRole] (
-    [Id]   NVARCHAR (128) NOT NULL,
-    [Name] NVARCHAR (256) NOT NULL,
+    [Id]   INT IDENTITY(1,1) NOT NULL,
+    [Name] VARCHAR (14) NOT NULL,
     CONSTRAINT [PK_dbo.AspNetRoles] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
@@ -119,23 +119,22 @@ CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex]
     ON [dbo].[AspNetRole]([Name] ASC);
 
 CREATE TABLE [dbo].[AspNetUser] (
-    [Id]                   NVARCHAR (128) NOT NULL,
-    [Email]                NVARCHAR (256) NULL,
-    [EmailConfirmed]       BIT            NOT NULL,
-    [PasswordHash]         NVARCHAR (MAX) NULL,
+    [Id]                INT IDENTITY(1,1) NOT NULL,
+    [Email]                NVARCHAR (256) NOT NULL,
+    [Password]             NVARCHAR (MAX)     NOT NULL,
     [SecurityStamp]        NVARCHAR (MAX) NULL,
     [PhoneNumber]          NVARCHAR (MAX) NULL,
-    [PhoneNumberConfirmed] BIT            NOT NULL,
-    [TwoFactorEnabled]     BIT            NOT NULL,
+    [PhoneNumberConfirmed] BIT            NULL,
+    [TwoFactorEnabled]     BIT            NULL,
     [LockoutEndDateUtc]    DATETIME       NULL,
-    [LockoutEnabled]       BIT            NOT NULL,
-    [AccessFailedCount]    INT            NOT NULL,
-    [UserName]             NVARCHAR (256) NOT NULL,
-    [idRole]               NVARCHAR (128) NULL,
-    [firstName]            NVARCHAR (100) NOT NULL,
-    [lastName]             NVARCHAR (100) NOT NULL,
-    [birthDay]             DATETIME       NOT NULL,
-    [cardNumber]           NVARCHAR (20)  NOT NULL,
+    [LockoutEnabled]       BIT            NULL,
+    [AccessFailedCount]    INT            NULL,
+    [UserName]             NVARCHAR (256) NULL,
+    [idRole]               INT NULL,
+    [firstName]            NVARCHAR (100) NULL,
+    [lastName]             NVARCHAR (100) NULL,
+    [birthDay]             DATETIME       NULL,
+    [cardNumber]           NVARCHAR (20)  NULL,
     [cnp]                  NVARCHAR (13)  NULL,
     CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC),
 	FOREIGN KEY ([idRole]) REFERENCES [dbo].[AspNetRole] ([Id])
@@ -143,7 +142,7 @@ CREATE TABLE [dbo].[AspNetUser] (
 
 CREATE TABLE [dbo].[AspNetUserClaim] (
     [Id]         INT            IDENTITY (1, 1) NOT NULL,
-    [UserId]     NVARCHAR (128) NOT NULL,
+    [UserId]     INT NOT NULL,
     [ClaimType]  NVARCHAR (MAX) NULL,
     [ClaimValue] NVARCHAR (MAX) NULL,
     CONSTRAINT [PK_dbo.AspNetUserClaims] PRIMARY KEY CLUSTERED ([Id] ASC),
@@ -158,7 +157,7 @@ CREATE NONCLUSTERED INDEX [IX_UserId]
 CREATE TABLE [dbo].[AspNetUserLogin] (
     [LoginProvider] NVARCHAR (128) NOT NULL,
     [ProviderKey]   NVARCHAR (128) NOT NULL,
-    [UserId]        NVARCHAR (128) NOT NULL,
+    [UserId]        INT NOT NULL,
     CONSTRAINT [PK_dbo.AspNetUserLogins] PRIMARY KEY CLUSTERED ([LoginProvider] ASC, [ProviderKey] ASC, [UserId] ASC),
     CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUser] ([Id]) ON DELETE CASCADE
 );
@@ -169,8 +168,8 @@ CREATE NONCLUSTERED INDEX [IX_UserId]
     ON [dbo].[AspNetUserLogin]([UserId] ASC);
 
 CREATE TABLE [dbo].[AspNetUserRole] (
-    [UserId] NVARCHAR (128) NOT NULL,
-    [RoleId] NVARCHAR (128) NOT NULL,
+    [UserId] INT NOT NULL,
+    [RoleId] INT NOT NULL,
     CONSTRAINT [PK_dbo.AspNetUserRoles] PRIMARY KEY CLUSTERED ([UserId] ASC, [RoleId] ASC),
     CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[AspNetRole] ([Id]) ON DELETE CASCADE,
     CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUser] ([Id]) ON DELETE CASCADE

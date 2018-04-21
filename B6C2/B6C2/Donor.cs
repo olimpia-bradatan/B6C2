@@ -15,7 +15,11 @@ namespace B6C2
 
     public partial class Donor
     {
-        public int idDonor { get; set; }
+        [Required]
+        [Display(Name = "CNP")]
+        [RegularExpression("[0-9]{13,13}", ErrorMessage = "CNP must contain exactly 13 digits!")]
+        public String cnp{ get; set; }
+
         [Required]
         [Display(Name = "First Name")]
         public string firstName { get; set; }
@@ -42,9 +46,8 @@ namespace B6C2
 
         [Display(Name = "Address")]
         public string address { get; set; }
-    
+
         public virtual donationCenter donationCenter { get; set; }
         public virtual Blood Blood { get; set; }
     }
 }
-

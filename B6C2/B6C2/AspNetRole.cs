@@ -21,7 +21,7 @@ namespace B6C2
             this.AspNetUsers1 = new HashSet<AspNetUser>();
         }
     
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

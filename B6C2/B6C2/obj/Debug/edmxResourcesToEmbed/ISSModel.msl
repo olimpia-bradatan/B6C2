@@ -14,8 +14,7 @@
         <MappingFragment StoreEntitySet="AspNetUser">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
           <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
           <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
@@ -73,11 +72,11 @@
     <EntitySetMapping Name="centerEmployees">
       <EntityTypeMapping TypeName="ISSModel.centerEmployee">
         <MappingFragment StoreEntitySet="centerEmployee">
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="lastName" ColumnName="lastName" />
-          <ScalarProperty Name="firstName" ColumnName="firstName" />
           <ScalarProperty Name="idEmployee" ColumnName="idEmployee" />
           <ScalarProperty Name="idCenter" ColumnName="idCenter" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="email" ColumnName="email" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -93,14 +92,14 @@
     <EntitySetMapping Name="Donors">
       <EntityTypeMapping TypeName="ISSModel.Donor">
         <MappingFragment StoreEntitySet="Donor">
-          <ScalarProperty Name="address" ColumnName="address" />
-          <ScalarProperty Name="idBlood" ColumnName="idBlood" />
-          <ScalarProperty Name="idDonor" ColumnName="idDonor" />
+          <ScalarProperty Name="cnp" ColumnName="cnp" />
           <ScalarProperty Name="firstName" ColumnName="firstName" />
           <ScalarProperty Name="lastName" ColumnName="lastName" />
           <ScalarProperty Name="birthDate" ColumnName="birthDate" />
+          <ScalarProperty Name="address" ColumnName="address" />
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="idBlood" ColumnName="idBlood" />
           <ScalarProperty Name="idCenter" ColumnName="idCenter" />
         </MappingFragment>
       </EntityTypeMapping>

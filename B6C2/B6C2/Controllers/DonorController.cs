@@ -20,7 +20,7 @@ namespace B6C2.Controllers
         }
 
         // GET: Donor/Details/5
-        public ActionResult DonorDetails(int id)
+        public ActionResult DonorDetails(String id)
         {
             return View(db.Donors.Find(id));
         }
@@ -62,14 +62,14 @@ namespace B6C2.Controllers
         }
 
         // GET: Donor/Edit/5
-        public ActionResult DonorEdit(int id)
+        public ActionResult DonorEdit(String id)
         {
             return View(db.Donors.Find(id));
         }
 
         // POST: Donor/Edit/5
         [HttpPost]
-        public ActionResult DonorEdit(int id, Donor donor)
+        public ActionResult DonorEdit(String id, Donor donor)
         {
             try
             {
@@ -85,14 +85,14 @@ namespace B6C2.Controllers
         }
 
         // GET: Donor/Delete/5
-        public ActionResult DonorDelete(int id)
+        public ActionResult DonorDelete(String id)
         {
             return View(db.Donors.Find(id));
         }
 
         // POST: Donor/Delete/5
         [HttpPost]
-        public ActionResult DonorDelete(int id, Donor donor)
+        public ActionResult DonorDelete(String id, Donor donor)
         {
             try
             {

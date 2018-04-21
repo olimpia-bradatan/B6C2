@@ -1,3 +1,4 @@
+C:\Users\Oli\Source\Repos\B6C2\B6C2\B6C2\obj\Debug\B6C2.csprojResolveAssemblyReference.cache
 C:\Users\Oli\Source\Repos\B6C2\B6C2\B6C2\bin\ApplicationInsights.config
 C:\Users\Oli\Source\Repos\B6C2\B6C2\B6C2\bin\roslyn\csc.exe
 C:\Users\Oli\Source\Repos\B6C2\B6C2\B6C2\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -79,4 +80,3 @@ C:\Users\Oli\Source\Repos\B6C2\B6C2\B6C2\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Oli\Source\Repos\B6C2\B6C2\B6C2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Oli\Source\Repos\B6C2\B6C2\B6C2\obj\Debug\B6C2.dll
 C:\Users\Oli\Source\Repos\B6C2\B6C2\B6C2\obj\Debug\B6C2.pdb
-C:\Users\Oli\Source\Repos\B6C2\B6C2\B6C2\obj\Debug\B6C2.csprojResolveAssemblyReference.cache
