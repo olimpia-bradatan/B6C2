@@ -1,0 +1,47 @@
+﻿@model IEnumerable<B6C2.Hospital>
+
+@{
+    ViewBag.Title = "Hospital Index";
+}
+
+<h2>Hospital List</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible" role="alert">
+        @TempData["Success"].ToString()
+    </div>
+    TempData["Success"] = null;
+}
+<p>
+    @Html.ActionLink("Create new hospital", "HospitalCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.address)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.address)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "HospitalEdit", new { id = item.idHospital }) |
+                @Html.ActionLink("Details", "HospitalDetails", new { id = item.idHospital }) |
+                @Html.ActionLink("Delete", "HospitalDelete", new { id = item.idHospital })
+            </td>
+        </tr>
+    }
+
+</table>

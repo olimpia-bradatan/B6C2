@@ -11,7 +11,8 @@ namespace B6C2
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Medic
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +22,14 @@ namespace B6C2
         }
     
         public int idMedic { get; set; }
+
+        [Required]
+        [Display(Name = "First Name")]
         public string firstName { get; set; }
+
+
+        [Required]
+        [Display(Name = "Last Name")]
         public string lastName { get; set; }
         public Nullable<int> idHospital { get; set; }
     
