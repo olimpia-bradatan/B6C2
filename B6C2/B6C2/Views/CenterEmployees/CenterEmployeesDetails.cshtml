@@ -1,0 +1,50 @@
+﻿@model B6C2.centerEmployee
+
+@{
+    ViewBag.Title = "CenterEmployeesDetails";
+}
+
+<h2>Details of this Center Employee</h2>
+
+<div>
+    <h4>centerEmployee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.firstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.donationCenter.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.donationCenter.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "CenterEmployeesEdit", new { id = Model.idEmployee }) |
+    @Html.ActionLink("Back to your Center Employees List", "CenterEmployeesIndex")
+</p>

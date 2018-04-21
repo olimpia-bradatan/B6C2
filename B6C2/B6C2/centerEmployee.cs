@@ -11,13 +11,21 @@ namespace B6C2
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class centerEmployee
     {
         public int idEmployee { get; set; }
         public Nullable<int> idCenter { get; set; }
+        [Required]
+        [Display(Name = "First Name")]
         public string firstName { get; set; }
+        [Required]
+        [Display(Name = "Last Name")]
         public string lastName { get; set; }
+        [Required]
+        [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
         public string email { get; set; }
     
         public virtual donationCenter donationCenter { get; set; }

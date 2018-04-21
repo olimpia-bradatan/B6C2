@@ -11,7 +11,8 @@ namespace B6C2
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class donationCenter
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,8 +24,13 @@ namespace B6C2
             this.Transactions = new HashSet<Transaction>();
         }
     
+   
         public int idCenter { get; set; }
+        [Required]
+        [Display(Name = "Center Name")]
         public string name { get; set; }
+        [Required]
+        [Display(Name = "Center Address")]
         public string address { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

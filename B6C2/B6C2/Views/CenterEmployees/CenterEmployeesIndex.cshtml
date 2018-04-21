@@ -1,0 +1,60 @@
+﻿@model IEnumerable<B6C2.centerEmployee>
+
+@{
+    ViewBag.Title = "CenterEmployeesIndex";
+}
+
+<h2>Center Employees List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CenterEmployeesCreate")
+</p>
+
+@if (TempData["Success"] != null)
+{
+<div class="alert alert-success alert-dismissible" role="alert">
+    @TempData["Success"].ToString()
+</div>
+TempData["Success"] = null;
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.firstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.donationCenter.name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.donationCenter.name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "CenterEmployeesEdit", new { id = item.idEmployee }) |
+                @Html.ActionLink("Details", "CenterEmployeesDetails", new { id = item.idEmployee }) |
+                @Html.ActionLink("Delete", "CenterEmployeesDelete", new { id = item.idEmployee })
+            </td>
+        </tr>
+    }
+
+</table>
