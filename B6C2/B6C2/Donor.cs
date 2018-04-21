@@ -18,7 +18,7 @@ namespace B6C2
         [Required]
         [Display(Name = "CNP")]
         [RegularExpression("[0-9]{13,13}", ErrorMessage = "CNP must contain exactly 13 digits!")]
-        public String cnp{ get; set; }
+        public String cnp { get; set; }
 
         [Required]
         [Display(Name = "First Name")]

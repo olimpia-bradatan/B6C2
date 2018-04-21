@@ -154,7 +154,7 @@
     <Property Name="idHospital" Type="int" Nullable="false" />
     <Property Name="status" Type="varchar" MaxLength="250" Nullable="false" />
   </EntityType>
-  <Association Name="FK__AspNetUse__idRol__7BE56230">
+  <Association Name="FK__AspNetUse__idRol__1881A0DE">
     <End Role="AspNetRole" Type="Self.AspNetRole" Multiplicity="0..1" />
     <End Role="AspNetUser" Type="Self.AspNetUser" Multiplicity="*" />
     <ReferentialConstraint>
@@ -358,7 +358,7 @@
     <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__AspNetUse__idRol__7BE56230" Association="Self.FK__AspNetUse__idRol__7BE56230">
+    <AssociationSet Name="FK__AspNetUse__idRol__1881A0DE" Association="Self.FK__AspNetUse__idRol__1881A0DE">
       <End Role="AspNetRole" EntitySet="AspNetRole" />
       <End Role="AspNetUser" EntitySet="AspNetUser" />
     </AssociationSet>
