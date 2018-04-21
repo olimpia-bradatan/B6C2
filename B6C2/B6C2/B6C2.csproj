@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -221,7 +222,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DonorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HospitalController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MedicController.cs" />
+    <Compile Include="Controllers\RequestBloodController.cs" />
     <Compile Include="donationCenter.cs">
       <DependentUpon>ISSModel.tt</DependentUpon>
     </Compile>
@@ -254,8 +258,11 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DonorComparer.cs" />
+    <Compile Include="Models\HospitalComparer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MedicComparer.cs" />
+    <Compile Include="Models\RequestBlood.cs" />
     <Compile Include="Patient.cs">
       <DependentUpon>ISSModel.tt</DependentUpon>
     </Compile>
@@ -350,6 +357,17 @@
     <Content Include="Views\Donor\DonorEdit.cshtml" />
     <Content Include="Views\Donor\DonorDelete.cshtml" />
     <Content Include="Views\Donor\DonorDetails.cshtml" />
+    <Content Include="Views\Medic\MedicIndex.cshtml" />
+    <Content Include="Views\Medic\MedicDetails.cshtml" />
+    <Content Include="Views\Medic\MedicCreate.cshtml" />
+    <Content Include="Views\Medic\MedicEdit.cshtml" />
+    <Content Include="Views\Medic\MedicDelete.cshtml" />
+    <Content Include="Views\Hospital\HospitalIndex.cshtml" />
+    <Content Include="Views\Hospital\HospitalDetails.cshtml" />
+    <Content Include="Views\Hospital\HospitalCreate.cshtml" />
+    <Content Include="Views\Hospital\HospitalEdit.cshtml" />
+    <Content Include="Views\Hospital\HospitalDelete.cshtml" />
+    <Content Include="Views\RequestBlood\RequestBloodCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
