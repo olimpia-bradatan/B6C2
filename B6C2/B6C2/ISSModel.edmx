@@ -159,7 +159,7 @@
           <Property Name="idHospital" Type="int" Nullable="false" />
           <Property Name="status" Type="varchar" MaxLength="250" Nullable="false" />
         </EntityType>
-        <Association Name="FK__AspNetUse__idRol__7BE56230">
+        <Association Name="FK__AspNetUse__idRol__1881A0DE">
           <End Role="AspNetRole" Type="Self.AspNetRole" Multiplicity="0..1" />
           <End Role="AspNetUser" Type="Self.AspNetUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -363,7 +363,7 @@
           <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__AspNetUse__idRol__7BE56230" Association="Self.FK__AspNetUse__idRol__7BE56230">
+          <AssociationSet Name="FK__AspNetUse__idRol__1881A0DE" Association="Self.FK__AspNetUse__idRol__1881A0DE">
             <End Role="AspNetRole" EntitySet="AspNetRole" />
             <End Role="AspNetUser" EntitySet="AspNetUser" />
           </AssociationSet>
@@ -435,7 +435,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK__AspNetUse__idRol__7BE56230" FromRole="AspNetRole" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK__AspNetUse__idRol__1881A0DE" FromRole="AspNetRole" ToRole="AspNetUser" />
           <NavigationProperty Name="AspNetUsers1" Relationship="Self.AspNetUserRole" FromRole="AspNetRole" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUser">
@@ -459,7 +459,7 @@
           <Property Name="birthDay" Type="DateTime" Precision="3" />
           <Property Name="cardNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="cnp" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetRole" Relationship="Self.FK__AspNetUse__idRol__7BE56230" FromRole="AspNetUser" ToRole="AspNetRole" />
+          <NavigationProperty Name="AspNetRole" Relationship="Self.FK__AspNetUse__idRol__1881A0DE" FromRole="AspNetUser" ToRole="AspNetRole" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRole" FromRole="AspNetUser" ToRole="AspNetRole" />
@@ -603,7 +603,7 @@
           <NavigationProperty Name="donationCenter" Relationship="Self.FK__Transacti__idCen__753864A1" FromRole="Transaction" ToRole="donationCenter" />
           <NavigationProperty Name="Hospital" Relationship="Self.FK__Transacti__idHos__7720AD13" FromRole="Transaction" ToRole="Hospital" />
         </EntityType>
-        <Association Name="FK__AspNetUse__idRol__7BE56230">
+        <Association Name="FK__AspNetUse__idRol__1881A0DE">
           <End Role="AspNetRole" Type="Self.AspNetRole" Multiplicity="0..1" />
           <End Role="AspNetUser" Type="Self.AspNetUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -782,7 +782,7 @@
           <EntitySet Name="Patients" EntityType="Self.Patient" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Transactions" EntityType="Self.Transaction" />
-          <AssociationSet Name="FK__AspNetUse__idRol__7BE56230" Association="Self.FK__AspNetUse__idRol__7BE56230">
+          <AssociationSet Name="FK__AspNetUse__idRol__1881A0DE" Association="Self.FK__AspNetUse__idRol__1881A0DE">
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ddbc934570c643aa8f34085efd92f1c4" Name="Diagram1">
+      <Diagram DiagramId="a2e321a81910453895af67aef5d1ca31" Name="Diagram1">
         <EntityTypeShape EntityType="ISSModel.AspNetRole" Width="1.5" PointX="8.75" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ISSModel.AspNetUser" Width="1.5" PointX="11" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ISSModel.AspNetUserClaim" Width="1.5" PointX="13.25" PointY="1.375" IsExpanded="true" />
@@ -19,7 +19,7 @@
         <EntityTypeShape EntityType="ISSModel.Patient" Width="1.5" PointX="8.25" PointY="12.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ISSModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ISSModel.Transaction" Width="1.5" PointX="6" PointY="2.25" IsExpanded="true" />
-        <AssociationConnector Association="ISSModel.FK__AspNetUse__idRol__7BE56230" ManuallyRouted="false" />
+        <AssociationConnector Association="ISSModel.FK__AspNetUse__idRol__1881A0DE" ManuallyRouted="false" />
         <AssociationConnector Association="ISSModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="ISSModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="ISSModel.FK__bloodReso__idBlo__69C6B1F5" ManuallyRouted="false" />
