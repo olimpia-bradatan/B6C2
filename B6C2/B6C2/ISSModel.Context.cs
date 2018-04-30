@@ -34,6 +34,7 @@ namespace B6C2
         public virtual DbSet<centerEmployee> centerEmployees { get; set; }
         public virtual DbSet<donationCenter> donationCenters { get; set; }
         public virtual DbSet<Donor> Donors { get; set; }
+        public virtual DbSet<donorTransaction> donorTransactions { get; set; }
         public virtual DbSet<Hospital> Hospitals { get; set; }
         public virtual DbSet<Medic> Medics { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }

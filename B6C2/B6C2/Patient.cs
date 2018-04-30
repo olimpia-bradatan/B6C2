@@ -14,6 +14,13 @@ namespace B6C2
     
     public partial class Patient
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Patient()
+        {
+            this.donorTransactions = new HashSet<donorTransaction>();
+            this.Transactions = new HashSet<Transaction>();
+        }
+    
         public int idPatient { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
@@ -21,6 +28,10 @@ namespace B6C2
         public string RH { get; set; }
         public Nullable<int> idMedic { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<donorTransaction> donorTransactions { get; set; }
         public virtual Medic Medic { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

@@ -11,8 +11,7 @@ namespace B6C2
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Blood
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,11 +23,7 @@ namespace B6C2
         }
     
         public int idBlood { get; set; }
-
-        [Display(Name = "Blood group")]
         public string group { get; set; }
-
-        [Display(Name = "Blood RH")]
         public string RH { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

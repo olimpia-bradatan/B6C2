@@ -11,43 +11,28 @@ namespace B6C2
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Donor
     {
-        [Required]
-        [Display(Name = "CNP")]
-        [RegularExpression("[0-9]{13,13}", ErrorMessage = "CNP must contain exactly 13 digits!")]
-        public String cnp { get; set; }
-
-        [Required]
-        [Display(Name = "First Name")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Donor()
+        {
+            this.donorTransactions = new HashSet<donorTransaction>();
+        }
+    
+        public string cnp { get; set; }
         public string firstName { get; set; }
-
-        [Required]
-        [Display(Name = "Last Name")]
         public string lastName { get; set; }
-
-        [Required]
-        [Display(Name = "Date of birth")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime birthDate { get; set; }
-
-        [Display(Name = "Email")]
-        [DataType(DataType.EmailAddress)]
-        public string email { get; set; }
-
-        [Display(Name = "Phone number")]
-        [RegularExpression("[0-9]{10,10}", ErrorMessage = "The phone number must contain 10 digits!")]
-        public string phoneNumber { get; set; }
-        public Nullable<int> idCenter { get; set; }
-        public Nullable<int> idBlood { get; set; }
-
-        [Display(Name = "Address")]
         public string address { get; set; }
-
-        public virtual donationCenter donationCenter { get; set; }
+        public string email { get; set; }
+        public string phoneNumber { get; set; }
+        public Nullable<int> idBlood { get; set; }
+        public Nullable<int> idCenter { get; set; }
+    
         public virtual Blood Blood { get; set; }
+        public virtual donationCenter donationCenter { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<donorTransaction> donorTransactions { get; set; }
     }
 }

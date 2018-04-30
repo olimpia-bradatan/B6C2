@@ -12,19 +12,18 @@ namespace B6C2
     using System;
     using System.Collections.Generic;
     
-    public partial class Transaction
+    public partial class donorTransaction
     {
-        public int idTransaction { get; set; }
-        public int quantity { get; set; }
-        public int idCenter { get; set; }
-        public int idBlood { get; set; }
-        public int idHospital { get; set; }
-        public Nullable<int> idPatient { get; set; }
+        public int id { get; set; }
+        public string cnpDonor { get; set; }
         public string status { get; set; }
+        public Nullable<System.DateTime> donationDate { get; set; }
+        public string analysisStatus { get; set; }
+        public Nullable<int> idPatient { get; set; }
+        public Nullable<int> idCenter { get; set; }
     
-        public virtual Blood Blood { get; set; }
         public virtual donationCenter donationCenter { get; set; }
-        public virtual Hospital Hospital { get; set; }
+        public virtual Donor Donor { get; set; }
         public virtual Patient Patient { get; set; }
     }
 }
