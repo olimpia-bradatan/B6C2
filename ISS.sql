@@ -1,3 +1,4 @@
+
 CREATE TABLE [dbo].[Hospital] (
     [idHospital] INT        IDENTITY (1, 1)   NOT NULL,
     [name]       VARCHAR (100) NOT NULL,
@@ -55,6 +56,20 @@ CREATE TABLE [dbo].[Donor] (
 	FOREIGN KEY ([idBlood]) REFERENCES [dbo].[Blood] ([idBlood])
 );
 
+CREATE TABLE donorTransaction (
+	[id] INT IDENTITY (1,1) NOT NULL,
+	[cnpDonor] VARCHAR(14) NOT NULL,
+	[status] VARCHAR(20) NULL,
+	[donationDate] DATE  NULL,
+	[analysisStatus] VARCHAR(15) NULL,
+	[idPatient] INT NULL,
+	[idCenter] INT NULL,
+	PRIMARY KEY CLUSTERED ([id] ASC),
+	FOREIGN KEY ([idCenter]) REFERENCES [dbo].[donationCenter] ([idCenter]),
+	FOREIGN KEY ([cnpDonor]) REFERENCES [dbo].[Donor] ([cnp]),
+	FOREIGN KEY ([idPatient]) REFERENCES [dbo].[Patient]([idPatient])
+);
+
 CREATE TABLE [dbo].[bloodResource] (
     [quantity] INT NOT NULL,
     [idCenter] INT NOT NULL,
@@ -100,11 +115,13 @@ CREATE TABLE [dbo].[Transaction] (
     [idCenter]   INT           NOT NULL,
     [idBlood]    INT           NOT NULL,
     [idHospital] INT           NOT NULL,
+	[idPatient]  INT           NULL,
     [status]     VARCHAR (250) NOT NULL,
 	PRIMARY KEY CLUSTERED ([idTransaction] ASC),
     FOREIGN KEY ([idCenter]) REFERENCES [dbo].[donationCenter] ([idCenter]),
     FOREIGN KEY ([idBlood]) REFERENCES [dbo].[Blood] ([idBlood]),
-    FOREIGN KEY ([idHospital]) REFERENCES [dbo].[Hospital] ([idHospital])
+    FOREIGN KEY ([idHospital]) REFERENCES [dbo].[Hospital] ([idHospital]),
+	FOREIGN KEY ([idPatient]) REFERENCES [dbo].[Patient]([idPatient])
 );
 
 CREATE TABLE [dbo].[AspNetRole] (
