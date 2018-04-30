@@ -56,19 +56,7 @@ CREATE TABLE [dbo].[Donor] (
 	FOREIGN KEY ([idBlood]) REFERENCES [dbo].[Blood] ([idBlood])
 );
 
-CREATE TABLE donorTransaction (
-	[id] INT IDENTITY (1,1) NOT NULL,
-	[cnpDonor] VARCHAR(14) NOT NULL,
-	[status] VARCHAR(20) NULL,
-	[donationDate] DATE  NULL,
-	[analysisStatus] VARCHAR(15) NULL,
-	[idPatient] INT NULL,
-	[idCenter] INT NULL,
-	PRIMARY KEY CLUSTERED ([id] ASC),
-	FOREIGN KEY ([idCenter]) REFERENCES [dbo].[donationCenter] ([idCenter]),
-	FOREIGN KEY ([cnpDonor]) REFERENCES [dbo].[Donor] ([cnp]),
-	FOREIGN KEY ([idPatient]) REFERENCES [dbo].[Patient]([idPatient])
-);
+
 
 CREATE TABLE [dbo].[bloodResource] (
     [quantity] INT NOT NULL,
@@ -121,6 +109,19 @@ CREATE TABLE [dbo].[Transaction] (
     FOREIGN KEY ([idCenter]) REFERENCES [dbo].[donationCenter] ([idCenter]),
     FOREIGN KEY ([idBlood]) REFERENCES [dbo].[Blood] ([idBlood]),
     FOREIGN KEY ([idHospital]) REFERENCES [dbo].[Hospital] ([idHospital]),
+	FOREIGN KEY ([idPatient]) REFERENCES [dbo].[Patient]([idPatient])
+);
+CREATE TABLE donorTransaction (
+	[id] INT IDENTITY (1,1) NOT NULL,
+	[cnpDonor] VARCHAR(14) NOT NULL,
+	[status] VARCHAR(20) NULL,
+	[donationDate] DATE  NULL,
+	[analysisStatus] VARCHAR(15) NULL,
+	[idPatient] INT NULL,
+	[idCenter] INT NULL,
+	PRIMARY KEY CLUSTERED ([id] ASC),
+	FOREIGN KEY ([idCenter]) REFERENCES [dbo].[donationCenter] ([idCenter]),
+	FOREIGN KEY ([cnpDonor]) REFERENCES [dbo].[Donor] ([cnp]),
 	FOREIGN KEY ([idPatient]) REFERENCES [dbo].[Patient]([idPatient])
 );
 
