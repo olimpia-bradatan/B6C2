@@ -1,0 +1,42 @@
+﻿@model B6C2.bloodResource
+
+@{
+    ViewBag.Title = "Details blood resource";
+}
+
+<h2>DetailsBloodResource</h2>
+
+<div>
+    <h4>bloodResource</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Blood.group)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Blood.group)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.donationCenter.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.donationCenter.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    
+    @Html.ActionLink("Back to List", "BloodResourceIndex")
+</p>

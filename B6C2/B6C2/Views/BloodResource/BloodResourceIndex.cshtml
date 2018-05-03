@@ -1,0 +1,45 @@
+﻿@model IEnumerable<B6C2.bloodResource>
+
+@{
+    ViewBag.Title = "BloodResourceIndex";
+}
+
+<h2>BloodResourceIndex</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateBloodResource")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Blood.group)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.donationCenter.name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Blood.group)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.donationCenter.name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditBloodResource", new { CenterID=item.idCenter, BloodID=item.idBlood }) |
+            @Html.ActionLink("Details", "DetailsBloodResource", new { CenterID=item.idCenter,BloodID=item.idBlood }) |
+            @Html.ActionLink("Delete", "DeleteBloodResource", new { CenterID = item.idCenter, BloodID = item.idBlood })
+        </td>
+    </tr>
+}
+
+</table>
