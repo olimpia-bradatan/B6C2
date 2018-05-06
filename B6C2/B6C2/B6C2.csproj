@@ -221,6 +221,7 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DonorController.cs" />
+    <Compile Include="Controllers\DonorNormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HospitalController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -371,6 +372,7 @@
     <Content Include="Views\Hospital\HospitalEdit.cshtml" />
     <Content Include="Views\Hospital\HospitalDelete.cshtml" />
     <Content Include="Views\RequestBlood\RequestBloodCreate.cshtml" />
+    <Content Include="Views\DonorNorm\DonorNormIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
