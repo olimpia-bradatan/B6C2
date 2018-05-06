@@ -232,6 +232,9 @@
     <Compile Include="Donor.cs">
       <DependentUpon>ISSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="donorTransaction.cs">
+      <DependentUpon>ISSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

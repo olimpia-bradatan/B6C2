@@ -46,7 +46,7 @@ CREATE TABLE [dbo].[Donor] (
     [firstName]   VARCHAR (50) NOT NULL,
     [lastName]    VARCHAR (50) NOT NULL,
     [birthDate]   DATE         NOT NULL,
-    [address]    VARCHAR (50) NOT NULL,
+    [address]    VARCHAR (250) NOT NULL,
     [email]       VARCHAR (50) NOT NULL,
     [phoneNumber] VARCHAR (10) NOT NULL,
     [idBlood]     INT          NULL,
@@ -82,6 +82,7 @@ CREATE TABLE [dbo].[Medic] (
     [firstName]  VARCHAR (50) NOT NULL,
     [lastName]   VARCHAR (50) NOT NULL,
     [idHospital] INT          NULL,
+	[email]      VARCHAR(30)  NOT NULL,
     PRIMARY KEY CLUSTERED ([idMedic] ASC),
     FOREIGN KEY ([idHospital]) REFERENCES [dbo].[Hospital] ([idHospital])
 );

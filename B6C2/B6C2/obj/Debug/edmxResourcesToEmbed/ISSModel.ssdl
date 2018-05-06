@@ -99,10 +99,22 @@
     <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="birthDate" Type="date" Nullable="false" />
-    <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="250" Nullable="false" />
     <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="phoneNumber" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="idBlood" Type="int" />
+    <Property Name="idCenter" Type="int" />
+  </EntityType>
+  <EntityType Name="donorTransaction">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cnpDonor" Type="varchar" MaxLength="14" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="20" />
+    <Property Name="donationDate" Type="date" />
+    <Property Name="analysisStatus" Type="varchar" MaxLength="15" />
+    <Property Name="idPatient" Type="int" />
     <Property Name="idCenter" Type="int" />
   </EntityType>
   <EntityType Name="Hospital">
@@ -121,6 +133,7 @@
     <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="idHospital" Type="int" />
+    <Property Name="email" Type="varchar" MaxLength="30" Nullable="false" />
   </EntityType>
   <EntityType Name="Patient">
     <Key>
@@ -152,9 +165,10 @@
     <Property Name="idCenter" Type="int" Nullable="false" />
     <Property Name="idBlood" Type="int" Nullable="false" />
     <Property Name="idHospital" Type="int" Nullable="false" />
+    <Property Name="idPatient" Type="int" />
     <Property Name="status" Type="varchar" MaxLength="250" Nullable="false" />
   </EntityType>
-  <Association Name="FK__AspNetUse__idRol__1881A0DE">
+  <Association Name="FK__AspNetUse__idRol__77DFC722">
     <End Role="AspNetRole" Type="Self.AspNetRole" Multiplicity="0..1" />
     <End Role="AspNetUser" Type="Self.AspNetUser" Multiplicity="*" />
     <ReferentialConstraint>
@@ -166,7 +180,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__bloodReso__idBlo__69C6B1F5">
+  <Association Name="FK__bloodReso__idBlo__60083D91">
     <End Role="Blood" Type="Self.Blood" Multiplicity="1" />
     <End Role="bloodResource" Type="Self.bloodResource" Multiplicity="*" />
     <ReferentialConstraint>
@@ -178,7 +192,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__bloodReso__idCen__68D28DBC">
+  <Association Name="FK__bloodReso__idCen__5F141958">
     <End Role="donationCenter" Type="Self.donationCenter" Multiplicity="1" />
     <End Role="bloodResource" Type="Self.bloodResource" Multiplicity="*" />
     <ReferentialConstraint>
@@ -190,7 +204,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__centerEmp__idCen__6CA31EA0">
+  <Association Name="FK__centerEmp__idCen__62E4AA3C">
     <End Role="donationCenter" Type="Self.donationCenter" Multiplicity="0..1" />
     <End Role="centerEmployee" Type="Self.centerEmployee" Multiplicity="*" />
     <ReferentialConstraint>
@@ -202,7 +216,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Donor__idBlood__65F62111">
+  <Association Name="FK__Donor__idBlood__5C37ACAD">
     <End Role="Blood" Type="Self.Blood" Multiplicity="0..1" />
     <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
     <ReferentialConstraint>
@@ -214,7 +228,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Donor__idCenter__6501FCD8">
+  <Association Name="FK__Donor__idCenter__5B438874">
     <End Role="donationCenter" Type="Self.donationCenter" Multiplicity="0..1" />
     <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
     <ReferentialConstraint>
@@ -226,7 +240,43 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Medic__idHospita__6F7F8B4B">
+  <Association Name="FK__donorTran__cnpDo__7226EDCC">
+    <End Role="Donor" Type="Self.Donor" Multiplicity="1" />
+    <End Role="donorTransaction" Type="Self.donorTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Donor">
+        <PropertyRef Name="cnp" />
+      </Principal>
+      <Dependent Role="donorTransaction">
+        <PropertyRef Name="cnpDonor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__donorTran__idCen__7132C993">
+    <End Role="donationCenter" Type="Self.donationCenter" Multiplicity="0..1" />
+    <End Role="donorTransaction" Type="Self.donorTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="donationCenter">
+        <PropertyRef Name="idCenter" />
+      </Principal>
+      <Dependent Role="donorTransaction">
+        <PropertyRef Name="idCenter" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__donorTran__idPat__731B1205">
+    <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
+    <End Role="donorTransaction" Type="Self.donorTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="idPatient" />
+      </Principal>
+      <Dependent Role="donorTransaction">
+        <PropertyRef Name="idPatient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Medic__idHospita__65C116E7">
     <End Role="Hospital" Type="Self.Hospital" Multiplicity="0..1" />
     <End Role="Medic" Type="Self.Medic" Multiplicity="*" />
     <ReferentialConstraint>
@@ -238,7 +288,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Patient__idMedic__725BF7F6">
+  <Association Name="FK__Patient__idMedic__689D8392">
     <End Role="Medic" Type="Self.Medic" Multiplicity="0..1" />
     <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
     <ReferentialConstraint>
@@ -250,7 +300,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Transacti__idBlo__762C88DA">
+  <Association Name="FK__Transacti__idBlo__6C6E1476">
     <End Role="Blood" Type="Self.Blood" Multiplicity="1" />
     <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
     <ReferentialConstraint>
@@ -262,7 +312,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Transacti__idCen__753864A1">
+  <Association Name="FK__Transacti__idCen__6B79F03D">
     <End Role="donationCenter" Type="Self.donationCenter" Multiplicity="1" />
     <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
     <ReferentialConstraint>
@@ -274,7 +324,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Transacti__idHos__7720AD13">
+  <Association Name="FK__Transacti__idHos__6D6238AF">
     <End Role="Hospital" Type="Self.Hospital" Multiplicity="1" />
     <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
     <ReferentialConstraint>
@@ -283,6 +333,18 @@
       </Principal>
       <Dependent Role="Transaction">
         <PropertyRef Name="idHospital" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Transacti__idPat__6E565CE8">
+    <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
+    <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="idPatient" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="idPatient" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -353,53 +415,70 @@
     <EntitySet Name="centerEmployee" EntityType="Self.centerEmployee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="donationCenter" EntityType="Self.donationCenter" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Donor" EntityType="Self.Donor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="donorTransaction" EntityType="Self.donorTransaction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Hospital" EntityType="Self.Hospital" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Medic" EntityType="Self.Medic" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__AspNetUse__idRol__1881A0DE" Association="Self.FK__AspNetUse__idRol__1881A0DE">
+    <AssociationSet Name="FK__AspNetUse__idRol__77DFC722" Association="Self.FK__AspNetUse__idRol__77DFC722">
       <End Role="AspNetRole" EntitySet="AspNetRole" />
       <End Role="AspNetUser" EntitySet="AspNetUser" />
     </AssociationSet>
-    <AssociationSet Name="FK__bloodReso__idBlo__69C6B1F5" Association="Self.FK__bloodReso__idBlo__69C6B1F5">
+    <AssociationSet Name="FK__bloodReso__idBlo__60083D91" Association="Self.FK__bloodReso__idBlo__60083D91">
       <End Role="Blood" EntitySet="Blood" />
       <End Role="bloodResource" EntitySet="bloodResource" />
     </AssociationSet>
-    <AssociationSet Name="FK__bloodReso__idCen__68D28DBC" Association="Self.FK__bloodReso__idCen__68D28DBC">
+    <AssociationSet Name="FK__bloodReso__idCen__5F141958" Association="Self.FK__bloodReso__idCen__5F141958">
       <End Role="donationCenter" EntitySet="donationCenter" />
       <End Role="bloodResource" EntitySet="bloodResource" />
     </AssociationSet>
-    <AssociationSet Name="FK__centerEmp__idCen__6CA31EA0" Association="Self.FK__centerEmp__idCen__6CA31EA0">
+    <AssociationSet Name="FK__centerEmp__idCen__62E4AA3C" Association="Self.FK__centerEmp__idCen__62E4AA3C">
       <End Role="donationCenter" EntitySet="donationCenter" />
       <End Role="centerEmployee" EntitySet="centerEmployee" />
     </AssociationSet>
-    <AssociationSet Name="FK__Donor__idBlood__65F62111" Association="Self.FK__Donor__idBlood__65F62111">
+    <AssociationSet Name="FK__Donor__idBlood__5C37ACAD" Association="Self.FK__Donor__idBlood__5C37ACAD">
       <End Role="Blood" EntitySet="Blood" />
       <End Role="Donor" EntitySet="Donor" />
     </AssociationSet>
-    <AssociationSet Name="FK__Donor__idCenter__6501FCD8" Association="Self.FK__Donor__idCenter__6501FCD8">
+    <AssociationSet Name="FK__Donor__idCenter__5B438874" Association="Self.FK__Donor__idCenter__5B438874">
       <End Role="donationCenter" EntitySet="donationCenter" />
       <End Role="Donor" EntitySet="Donor" />
     </AssociationSet>
-    <AssociationSet Name="FK__Medic__idHospita__6F7F8B4B" Association="Self.FK__Medic__idHospita__6F7F8B4B">
+    <AssociationSet Name="FK__donorTran__cnpDo__7226EDCC" Association="Self.FK__donorTran__cnpDo__7226EDCC">
+      <End Role="Donor" EntitySet="Donor" />
+      <End Role="donorTransaction" EntitySet="donorTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK__donorTran__idCen__7132C993" Association="Self.FK__donorTran__idCen__7132C993">
+      <End Role="donationCenter" EntitySet="donationCenter" />
+      <End Role="donorTransaction" EntitySet="donorTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK__donorTran__idPat__731B1205" Association="Self.FK__donorTran__idPat__731B1205">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="donorTransaction" EntitySet="donorTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Medic__idHospita__65C116E7" Association="Self.FK__Medic__idHospita__65C116E7">
       <End Role="Hospital" EntitySet="Hospital" />
       <End Role="Medic" EntitySet="Medic" />
     </AssociationSet>
-    <AssociationSet Name="FK__Patient__idMedic__725BF7F6" Association="Self.FK__Patient__idMedic__725BF7F6">
+    <AssociationSet Name="FK__Patient__idMedic__689D8392" Association="Self.FK__Patient__idMedic__689D8392">
       <End Role="Medic" EntitySet="Medic" />
       <End Role="Patient" EntitySet="Patient" />
     </AssociationSet>
-    <AssociationSet Name="FK__Transacti__idBlo__762C88DA" Association="Self.FK__Transacti__idBlo__762C88DA">
+    <AssociationSet Name="FK__Transacti__idBlo__6C6E1476" Association="Self.FK__Transacti__idBlo__6C6E1476">
       <End Role="Blood" EntitySet="Blood" />
       <End Role="Transaction" EntitySet="Transaction" />
     </AssociationSet>
-    <AssociationSet Name="FK__Transacti__idCen__753864A1" Association="Self.FK__Transacti__idCen__753864A1">
+    <AssociationSet Name="FK__Transacti__idCen__6B79F03D" Association="Self.FK__Transacti__idCen__6B79F03D">
       <End Role="donationCenter" EntitySet="donationCenter" />
       <End Role="Transaction" EntitySet="Transaction" />
     </AssociationSet>
-    <AssociationSet Name="FK__Transacti__idHos__7720AD13" Association="Self.FK__Transacti__idHos__7720AD13">
+    <AssociationSet Name="FK__Transacti__idHos__6D6238AF" Association="Self.FK__Transacti__idHos__6D6238AF">
       <End Role="Hospital" EntitySet="Hospital" />
+      <End Role="Transaction" EntitySet="Transaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transacti__idPat__6E565CE8" Association="Self.FK__Transacti__idPat__6E565CE8">
+      <End Role="Patient" EntitySet="Patient" />
       <End Role="Transaction" EntitySet="Transaction" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">

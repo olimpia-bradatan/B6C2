@@ -24,6 +24,7 @@ namespace B6C2
         public string firstName { get; set; }
         public string lastName { get; set; }
         public Nullable<int> idHospital { get; set; }
+        public string email { get; set; }
     
         public virtual Hospital Hospital { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
