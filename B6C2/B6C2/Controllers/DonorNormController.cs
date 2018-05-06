@@ -25,7 +25,6 @@ namespace B6C2.Controllers
             for (int i = 0; i < db.Donors.Count(); i++)
             {
                 donor.Add(db.Donors.ToList().ElementAt(i));
-
             }
 
 
