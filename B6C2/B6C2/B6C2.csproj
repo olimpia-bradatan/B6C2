@@ -220,12 +220,18 @@
       <DependentUpon>ISSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BloodResourceController.cs" />
+    <Compile Include="Controllers\CenterEmployeesController.cs" />
+    <Compile Include="Controllers\DonatingFormController.cs" />
+    <Compile Include="Controllers\DonationCenterController.cs" />
     <Compile Include="Controllers\DonorController.cs" />
+    <Compile Include="Controllers\DonorNormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HospitalController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MedicController.cs" />
     <Compile Include="Controllers\RequestBloodController.cs" />
+    <Compile Include="CustomLibraries\CustomDecrypt.cs" />
+    <Compile Include="CustomLibraries\CustomEncrypt.cs" />
     <Compile Include="donationCenter.cs">
       <DependentUpon>ISSModel.tt</DependentUpon>
     </Compile>
@@ -260,10 +266,13 @@
       <DependentUpon>ISSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\bloodResourceComparer.cs" />
+    <Compile Include="Models\CenterEmployeeComparer.cs" />
+    <Compile Include="Models\DonatingForm.cs" />
+    <Compile Include="Models\DonationCenterComparer.cs" />
     <Compile Include="Models\DonorComparer.cs" />
     <Compile Include="Models\HospitalComparer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MedicComparer.cs" />
     <Compile Include="Models\RequestBlood.cs" />
     <Compile Include="Patient.cs">
@@ -330,30 +339,10 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Donor\DonorIndex.cshtml" />
     <Content Include="Views\Donor\DonorCreate.cshtml" />
@@ -371,6 +360,26 @@
     <Content Include="Views\Hospital\HospitalEdit.cshtml" />
     <Content Include="Views\Hospital\HospitalDelete.cshtml" />
     <Content Include="Views\RequestBlood\RequestBloodCreate.cshtml" />
+    <Content Include="Views\DonorNorm\DonorNormIndex.cshtml" />
+    <Content Include="Views\BloodResource\BloodResourceIndex.cshtml" />
+    <Content Include="Views\BloodResource\CreateBloodResource.cshtml" />
+    <Content Include="Views\BloodResource\DeleteBloodResource.cshtml" />
+    <Content Include="Views\BloodResource\DetailsBloodResource.cshtml" />
+    <Content Include="Views\BloodResource\EditBloodResource.cshtml" />
+    <Content Include="Views\CenterEmployees\CenterEmployeesCreate.cshtml" />
+    <Content Include="Views\CenterEmployees\CenterEmployeesDelete.cshtml" />
+    <Content Include="Views\CenterEmployees\CenterEmployeesDetails.cshtml" />
+    <Content Include="Views\CenterEmployees\CenterEmployeesEdit.cshtml" />
+    <Content Include="Views\CenterEmployees\CenterEmployeesIndex.cshtml" />
+    <Content Include="Views\DonatingForm\CreateDonatingForm.cshtml" />
+    <Content Include="Views\DonationCenter\DonationCenterCreate.cshtml" />
+    <Content Include="Views\DonationCenter\DonationCenterDelete.cshtml" />
+    <Content Include="Views\DonationCenter\DonationCenterDetails.cshtml" />
+    <Content Include="Views\DonationCenter\DonationCenterEdit.cshtml" />
+    <Content Include="Views\DonationCenter\DonationCenterIndex.cshtml" />
+    <Content Include="Views\Account\RegisterCentreEmployee.cshtml" />
+    <Content Include="Views\Account\RegisterDonor.cshtml" />
+    <Content Include="Views\Account\RegisterMedic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
