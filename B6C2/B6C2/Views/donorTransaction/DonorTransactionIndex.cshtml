@@ -1,0 +1,61 @@
+﻿@model IEnumerable<B6C2.donorTransaction>
+
+@{
+    ViewBag.Title = "DonorTransactionIndex";
+}
+
+<h2>Your previous donations</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Donor.firstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Donor.lastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.donationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.donationCenter.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.analysisStatus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Donor.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Donor.lastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.donationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.donationCenter.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.analysisStatus)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.id }) 
+        </td>
+    </tr>
+}
+
+</table>
