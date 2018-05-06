@@ -7,7 +7,7 @@
 <h2>List of donors close to the center </h2>
 
 <p>
-    @Html.ActionLink("Back", "Create")
+    @Html.ActionLink("Back", "DonationCenterIndex", "DonationCenter"/*, new { id = item.idCenter }*/)
 </p>
 <table class="table">
     <tr>
@@ -65,15 +65,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.donationCenter.name)
             </td>
-            <td>
-                @using (Html.BeginForm("action", "DonorNormIndex"))
-                {
-
-                    <input type="submit" value="Send a email." />
-
-                }
-            </td>
+            <td></td>
         </tr>
     }
 
 </table>
+@using (Html.BeginForm("action", "DonorNormIndex"))
+{
+
+    <input type="submit" value="Send email" />
+
+}

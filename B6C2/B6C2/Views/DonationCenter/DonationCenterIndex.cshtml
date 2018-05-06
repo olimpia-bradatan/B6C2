@@ -41,7 +41,8 @@
                 @Html.ActionLink("Edit", "DonationCenterEdit", new { id = item.idCenter }) |
                 @Html.ActionLink("Details", "DonationCenterDetails", new { id = item.idCenter }) |
                 @Html.ActionLink("Delete", "DonationCenterDelete", new { id = item.idCenter }) |
-                @Html.ActionLink("Request Blood","RequestBloodCreate", "RequestBlood"/*, new { id = item.idCenter }*/)
+                @Html.ActionLink("Request Blood", "RequestBloodCreate", "RequestBlood"/*, new { id = item.idCenter }*/) |
+                @Html.ActionLink("Looking for donors", "DonorNormIndex", "DonorNorm",  new { id = item.idCenter }, null)
             </td>
         </tr>
     }

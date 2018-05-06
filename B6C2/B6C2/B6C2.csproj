@@ -220,6 +220,10 @@
       <DependentUpon>ISSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BloodResourceController.cs" />
+    <Compile Include="Controllers\CenterEmployeesController.cs" />
+    <Compile Include="Controllers\DonatingFormController.cs" />
+    <Compile Include="Controllers\DonationCenterController.cs" />
     <Compile Include="Controllers\DonorController.cs" />
     <Compile Include="Controllers\DonorNormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -261,6 +265,10 @@
       <DependentUpon>ISSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\bloodResourceComparer.cs" />
+    <Compile Include="Models\CenterEmployeeComparer.cs" />
+    <Compile Include="Models\DonatingForm.cs" />
+    <Compile Include="Models\DonationCenterComparer.cs" />
     <Compile Include="Models\DonorComparer.cs" />
     <Compile Include="Models\HospitalComparer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -373,6 +381,22 @@
     <Content Include="Views\Hospital\HospitalDelete.cshtml" />
     <Content Include="Views\RequestBlood\RequestBloodCreate.cshtml" />
     <Content Include="Views\DonorNorm\DonorNormIndex.cshtml" />
+    <Content Include="Views\BloodResource\BloodResourceIndex.cshtml" />
+    <Content Include="Views\BloodResource\CreateBloodResource.cshtml" />
+    <Content Include="Views\BloodResource\DeleteBloodResource.cshtml" />
+    <Content Include="Views\BloodResource\DetailsBloodResource.cshtml" />
+    <Content Include="Views\BloodResource\EditBloodResource.cshtml" />
+    <Content Include="Views\CenterEmployees\CenterEmployeesCreate.cshtml" />
+    <Content Include="Views\CenterEmployees\CenterEmployeesDelete.cshtml" />
+    <Content Include="Views\CenterEmployees\CenterEmployeesDetails.cshtml" />
+    <Content Include="Views\CenterEmployees\CenterEmployeesEdit.cshtml" />
+    <Content Include="Views\CenterEmployees\CenterEmployeesIndex.cshtml" />
+    <Content Include="Views\DonatingForm\CreateDonatingForm.cshtml" />
+    <Content Include="Views\DonationCenter\DonationCenterCreate.cshtml" />
+    <Content Include="Views\DonationCenter\DonationCenterDelete.cshtml" />
+    <Content Include="Views\DonationCenter\DonationCenterDetails.cshtml" />
+    <Content Include="Views\DonationCenter\DonationCenterEdit.cshtml" />
+    <Content Include="Views\DonationCenter\DonationCenterIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

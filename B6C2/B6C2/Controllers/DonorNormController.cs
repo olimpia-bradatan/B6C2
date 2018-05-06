@@ -16,7 +16,7 @@ namespace B6C2.Controllers
 
 
         // GET: DonorNorm/Edit/5
-        public ActionResult DonorNormIndex()
+        public ActionResult DonorNormIndex( String id)
         {
             List<Donor> donor = new List<Donor>();
             List<Donor> donorbun = new List<Donor>();
@@ -35,7 +35,7 @@ namespace B6C2.Controllers
             while (cordH.Count == 0)
             {
                 cordH.Clear();
-                cordH = GetLatLng(db.donationCenters.ToList().ElementAt(0).address);
+                cordH = GetLatLng(db.donationCenters.ToList().ElementAt(Int32.Parse(id)).address);
 
             }
 
@@ -52,7 +52,7 @@ namespace B6C2.Controllers
 
 
                 //1
-                if (Norm(Convert.ToDouble(cordH.ToList().ElementAt(0)), Convert.ToDouble(cordH.ToList().ElementAt(1)), Convert.ToDouble(cordD.ToList().ElementAt(0)), Convert.ToDouble(cordD.ToList().ElementAt(1))) < 50)
+                if (Norm(Convert.ToDouble(cordH.ToList().ElementAt(0)), Convert.ToDouble(cordH.ToList().ElementAt(1)), Convert.ToDouble(cordD.ToList().ElementAt(0)), Convert.ToDouble(cordD.ToList().ElementAt(1))) < 10)
                 {
                     Console.WriteLine(Norm(Convert.ToDouble(cordH.ToList().ElementAt(0)), Convert.ToDouble(cordH.ToList().ElementAt(1)), Convert.ToDouble(cordD.ToList().ElementAt(0)), Convert.ToDouble(cordD.ToList().ElementAt(1))));
                     donorbun.Add(donor.ElementAt(i));
