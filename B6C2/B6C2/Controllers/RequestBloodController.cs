@@ -26,7 +26,7 @@ namespace B6C2.Controllers
 
                 Transaction t = new Transaction();
                 t.idBlood = req.idBlood;
-                t.status = "In curs de aprobare";
+                t.status = "Prelevare";
                 t.idCenter = 1;
                 t.idHospital = 3;
                 t.quantity = req.quantity;

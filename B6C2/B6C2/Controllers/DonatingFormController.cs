@@ -10,6 +10,18 @@ namespace B6C2.Controllers
     public class DonatingFormController : Controller
     {
         ISSContext db = new ISSContext();
+
+        private List<SelectListItem> GetDonationCentersList()
+        {
+            return db.donationCenters
+              .Select(e => new SelectListItem
+              {
+                  Value = e.idCenter.ToString(),
+                  Text = e.name
+              })
+             .ToList();
+        }
+
         // GET: DonatingForm
         public ActionResult Index()
         {
@@ -25,6 +37,7 @@ namespace B6C2.Controllers
         // GET: DonatingForm/Create
         public ActionResult CreateDonatingForm()
         {
+            ViewBag.DonationCenters = new SelectList(GetDonationCentersList(), "Value", "Text");
             return View();
         }
 
@@ -32,71 +45,28 @@ namespace B6C2.Controllers
         [HttpPost]
         public ActionResult CreateDonatingForm(DonatingForm donatingForm)
         {
-                int age = donatingForm.age;
-                int weight = donatingForm.weight;
-                int pulse = donatingForm.pulse;
-                Boolean pregnancy = donatingForm.womanProblems;
-                Boolean drinking = donatingForm.drink;
-                Boolean intervention = donatingForm.intervention;
-                Boolean affections = donatingForm.affections;
-                if (age >= 18 && age <= 60 && weight >= 50 && pulse >= 60 && pulse <= 100 && !pregnancy && !drinking && !intervention && !affections)
-                {
-                    donorTransaction d = new donorTransaction();
-                    d.cnpDonor = donatingForm.cnp;
-                    d.idCenter = 1;
-                    d.status = "Prelevare";
-                    db.donorTransactions.Add(d);
-                    db.SaveChanges();
-                    TempData["Success"] = "Your request for donating blood has been submitted!";
-                    return RedirectToAction("DonationCenterIndex", "DonationCenter");
-                }
-                TempData["ConditionsNotMet"] = "Sorry, the conditions to donate cannot be applied in your case!";
+            ViewBag.DonationCenters = new SelectList(GetDonationCentersList(), "Value", "Text");
+            int age = donatingForm.age;
+            int weight = donatingForm.weight;
+            int pulse = donatingForm.pulse;
+            Boolean pregnancy = donatingForm.womanProblems;
+            Boolean drinking = donatingForm.drink;
+            Boolean intervention = donatingForm.intervention;
+            Boolean affections = donatingForm.affections;
+            if (age >= 18 && age <= 60 && weight >= 50 && pulse >= 60 && pulse <= 100 && !pregnancy && !drinking && !intervention && !affections)
+            {
+                donorTransaction d = new donorTransaction();
+                d.cnpDonor = donatingForm.cnp;
+                d.idCenter = donatingForm.idCenter;
+                d.status = "Prelevare";
+                db.donorTransactions.Add(d);
+                db.SaveChanges();
+                int idTransaction = db.donorTransactions.Find(d.cnpDonor).id;
+                TempData["Success"] = "Your request for donating blood has been submitted! The id of your transaction is " + idTransaction;
                 return RedirectToAction("DonationCenterIndex", "DonationCenter");
-            
-        }
-
-        // GET: DonatingForm/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: DonatingForm/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: DonatingForm/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: DonatingForm/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            TempData["ConditionsNotMet"] = "Sorry, the conditions to donate cannot be applied in your case!";
+            return RedirectToAction("DonationCenterIndex", "DonationCenter");
         }
     }
 }

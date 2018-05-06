@@ -8,6 +8,9 @@ namespace B6C2.Models
 {
     public class DonatingForm
     {
+        [Display(Name = "Center")]
+        public int idCenter { get; set; }
+
         [Display(Name = "First Name")]
         public String firstName { get; set; }
 

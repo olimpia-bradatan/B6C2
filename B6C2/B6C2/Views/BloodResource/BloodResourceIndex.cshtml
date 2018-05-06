@@ -9,6 +9,15 @@
 <p>
     @Html.ActionLink("Create New", "CreateBloodResource")
 </p>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        @TempData["Success"].ToString()
+    </div>
+    TempData["Success"] = null;
+}
+
 <table class="table">
     <tr>
         <th>

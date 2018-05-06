@@ -10,6 +10,18 @@ namespace B6C2.Controllers
     public class BloodResourceController : Controller
     {
         ISSContext db = new ISSContext();
+
+        private List<SelectListItem> GetDonationCentersList()
+        {
+            return db.donationCenters
+              .Select(e => new SelectListItem
+              {
+                  Value = e.idCenter.ToString(),
+                  Text = e.name
+              })
+             .ToList();
+        }
+
         // GET: bloodResource
         public ActionResult BloodResourceIndex()
         {
@@ -28,6 +40,7 @@ namespace B6C2.Controllers
         // GET: bloodResource/Create
         public ActionResult CreateBloodResource()
         {
+            ViewBag.DonationCenters = new SelectList(GetDonationCentersList(), "Value", "Text");
             return View();
         }
 
