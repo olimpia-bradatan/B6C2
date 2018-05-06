@@ -9,20 +9,23 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using B6C2.Models;
+using System.Data.Entity.Validation;
+using PC.CustomLibraries;
 
 namespace B6C2.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        ISSContext db = new ISSContext();
+
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +37,9 @@ namespace B6C2.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -64,31 +67,100 @@ namespace B6C2.Controllers
         //
         // POST: /Account/Login
         [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel user)
         {
+
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View(user);
             }
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            var emailCheck = db.AspNetUsers.FirstOrDefault(u => u.Email == user.Email);
+            if (emailCheck != null)
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                var getPassword = db.AspNetUsers.Where(u => u.Email == user.Email).Select(u => u.Password);
+                var materializePassword = getPassword.ToList();
+                var password = materializePassword[0];
+
+                var encryptedPass = CustomEncrypt.Encrypt(user.Password);
+                if (encryptedPass == password)
+                {
+                    string name = "";
+                    if (db.Donors.Any(d => d.email == user.Email) == true)
+                    {
+                        var getFirstName = db.Donors.Where(u => u.email == user.Email).Select(u => u.firstName);
+                        var materName = getFirstName.ToList();
+                        var firstName = materName[0];
+
+                        var getName1 = db.Donors.Where(u => u.email == user.Email).Select(u => u.lastName);
+                        var materName1 = getName1.ToList();
+                        var lastName = materName1[0];
+
+                        name = firstName + " " + lastName;
+                    }
+                    else
+                    {
+                        if (db.Medics.Any(d => d.email == user.Email) == true)
+                        {
+                            var getFirstName = db.Medics.Where(u => u.email == user.Email).Select(u => u.firstName);
+                            var materName = getFirstName.ToList();
+                            var firstName = materName[0];
+
+                            var getName1 = db.Medics.Where(u => u.email == user.Email).Select(u => u.lastName);
+                            var materName1 = getName1.ToList();
+                            var lastName = materName1[0];
+
+                            name = firstName + " " + lastName;
+                        }
+                        else
+                        {
+                            if (db.centerEmployees.Any(d => d.email == user.Email) == true)
+                            {
+                                var getFirstName = db.centerEmployees.Where(u => u.email == user.Email).Select(u => u.firstName);
+                                var materName = getFirstName.ToList();
+                                var firstName = materName[0];
+
+                                var getName1 = db.centerEmployees.Where(u => u.email == user.Email).Select(u => u.lastName);
+                                var materName1 = getName1.ToList();
+                                var lastName = materName1[0];
+
+                                name = firstName + " " + lastName;
+                            }
+                        }
+                    }
+
+                    var getEmail = db.AspNetUsers.Where(u => u.Email == user.Email).Select(u => u.Email);
+                    var materializeEmail = getEmail.ToList();
+                    var email = materializeEmail[0];
+
+
+                    var idRole = db.AspNetUsers.Where(u => u.Email == user.Email).Select(u => u.idRole);
+                    var materializeRole = idRole.ToList();
+                    var role = materializeRole[0];
+
+                    var roleName = db.AspNetRoles.Find(role).Name.ToString();
+
+                    var identity = new ClaimsIdentity(new[] {
+                        new Claim(ClaimTypes.Name, name),
+                        new Claim(ClaimTypes.Email, email),
+                        new Claim(ClaimTypes.Role, roleName)
+                }, "ApplicationCookie");
+                    var ctx = Request.GetOwinContext();
+                    var accountManager = ctx.Authentication;
+                    accountManager.SignIn(identity);
+                    TempData["SuccessRegistration"] = "You signed in into your account as ";
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The password is incorrect");
+                }
             }
+            else
+            {
+                ModelState.AddModelError("", "The email is incorrect");
+
+            }
+            return View(user);
         }
 
         //
@@ -120,7 +192,7 @@ namespace B6C2.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -137,39 +209,185 @@ namespace B6C2.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult RegisterDonor()
         {
             return View();
         }
 
-        //
-        // POST: /Account/Register
-        [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        [HttpPost]
+        public ActionResult RegisterDonor(DonorRegisterViewModel user)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (ModelState.IsValid)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    var encryptedPassword = CustomEncrypt.Encrypt(user.Password);
+                    if (db.AspNetUsers.FirstOrDefault(o => o.Email == user.Email) != null)
+                    {
+                        TempData["UserAlreadyExists"] = "This donor already exists";
+                        return View(user);
+                    }
+                    var donor = new Donor();
+                    donor.cnp = user.CNP;
+                    donor.firstName = user.firstName;
+                    donor.lastName = user.lastName;
+                    donor.birthDate = user.birthDate;
+                    donor.address = user.address;
+                    donor.email = user.Email;
+                    donor.phoneNumber = user.phoneNumber;
+                    db.Donors.Add(donor);
 
-                    return RedirectToAction("Index", "Home");
+                    var userDb = new AspNetUser();
+                    userDb.Email = user.Email;
+                    userDb.Password = encryptedPassword;
+                    userDb.idRole = 1;
+                    db.AspNetUsers.Add(userDb);
+                    db.SaveChanges();
+                    TempData["SuccessRegistration"] = "You registered successfully";
+                    return RedirectToAction("Login", "Account");
                 }
-                AddErrors(result);
+                else
+                {
+                    return View(user);
+                }
             }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+                            ve.PropertyName,
+                            eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
+                            ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
+        }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+
+        [AllowAnonymous]
+        public ActionResult RegisterMedic()
+        {
+            return View();
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult RegisterMedic(MedicRegisterViewModel user)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var encryptedPassword = CustomEncrypt.Encrypt(user.Password);
+
+                    if (db.AspNetUsers.Any(o => o.Email == user.Email))
+                    {
+                        TempData["UserAlreadyExists"] = "This medic already exists";
+                        return View(user);
+                    }
+                    var medic = new Medic();
+                    medic.firstName = user.firstName;
+                    medic.lastName = user.lastName;
+                    medic.email = user.Email;
+                    db.Medics.Add(medic);
+
+                    var userDb = new AspNetUser();
+                    userDb.Email = user.Email;
+                    userDb.Password = encryptedPassword;
+                    userDb.idRole = 3;
+                    db.AspNetUsers.Add(userDb);
+                    db.SaveChanges();
+                    TempData["SuccessRegistration"] = "You registered successfully";
+                    return RedirectToAction("Login", "Account");
+                }
+                else
+                {
+                    return View(user);
+                }
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+                            ve.PropertyName,
+                            eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
+                            ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult RegisterCentreEmployee()
+        {
+            return View();
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult RegisterCentreEmployee(CentreEmployeeRegisterViewModel user)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var encryptedPassword = CustomEncrypt.Encrypt(user.Password);
+
+                    if (db.AspNetUsers.Any(o => o.Email == user.Email))
+                    {
+                        TempData["UserAlreadyExists"] = "This employee already exists";
+                        return View(user);
+                    }
+                    var employee = new centerEmployee();
+                    employee.firstName = user.firstName;
+                    employee.lastName = user.lastName;
+                    employee.email = user.Email;
+                    db.centerEmployees.Add(employee);
+
+                    var userDb = new AspNetUser();
+                    userDb.Email = user.Email;
+                    userDb.Password = encryptedPassword;
+                    userDb.idRole = 2;
+                    db.AspNetUsers.Add(userDb);
+                    db.SaveChanges();
+                    TempData["SuccessRegistration"] = "You registered successfully";
+                    return RedirectToAction("Login", "Account");
+                }
+                else
+                {
+                    return View(user);
+                }
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+                            ve.PropertyName,
+                            eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
+                            ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
         }
 
         //

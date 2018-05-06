@@ -231,6 +231,8 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MedicController.cs" />
     <Compile Include="Controllers\RequestBloodController.cs" />
+    <Compile Include="CustomLibraries\CustomDecrypt.cs" />
+    <Compile Include="CustomLibraries\CustomEncrypt.cs" />
     <Compile Include="donationCenter.cs">
       <DependentUpon>ISSModel.tt</DependentUpon>
     </Compile>
