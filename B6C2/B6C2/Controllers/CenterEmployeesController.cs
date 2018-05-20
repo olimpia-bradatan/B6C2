@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace B6C2.Controllers
@@ -102,6 +103,45 @@ namespace B6C2.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult SendEmail()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SendEmail(Donor donor)
+        {
+            try
+            {
+                //Configuring webMail class to send emails  
+                //gmail smtp server  
+                WebMail.SmtpServer = "smtp.gmail.com";
+                //gmail port to send emails  
+                WebMail.SmtpPort = 587;
+                WebMail.SmtpUseDefaultCredentials = true;
+                //sending emails with secure protocol  
+                WebMail.EnableSsl = true;
+                //EmailId used to send emails from application  
+                WebMail.UserName = "test57681";
+                WebMail.Password = "test57681test57681";
+
+
+                //Sender email address.  
+                WebMail.From = "test57681@gmail.com";
+                string text = "Dear " + donor.firstName +" "+donor.lastName+"," + "<br/> " + "Because of the high number of patients, we need a big quantity of blood at the center "+db.donationCenters.Find(donor.idCenter).name+" with the adress "+ db.donationCenters.Find(donor.idCenter).address +". If you are close to the center, please do not hesitate to pay us a visit in order to make a blood donation.<br/>" + "We are looking forward to you helping us as soon as possible.";
+
+                //Send email  
+                WebMail.Send(to: donor.email, subject: "Blood needed", body: text, isBodyHtml: true);
+                ViewBag.Status = "Email Sent Successfully.";
+            }
+            catch (Exception)
+            {
+                ViewBag.Status = "Problem while sending email, Please check details.";
+
+            }
+            return View();
         }
     }
 }

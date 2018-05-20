@@ -65,14 +65,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.donationCenter.name)
             </td>
-            <td></td>
+            <td>
+                @Html.ActionLink("Send email","SendEmail","CenterEmployees",item,null)
+            </td>
         </tr>
     }
 
 </table>
-@using (Html.BeginForm("action", "DonorNormIndex"))
-{
-
-    <input type="submit" value="Send email" />
-
-}

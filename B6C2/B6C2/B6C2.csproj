@@ -380,6 +380,7 @@
     <Content Include="Views\Account\RegisterCentreEmployee.cshtml" />
     <Content Include="Views\Account\RegisterDonor.cshtml" />
     <Content Include="Views\Account\RegisterMedic.cshtml" />
+    <Content Include="Views\CenterEmployees\SendEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
