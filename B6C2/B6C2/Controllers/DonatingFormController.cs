@@ -11,16 +11,13 @@ namespace B6C2.Controllers
     {
         ISSContext db = new ISSContext();
 
-        private List<SelectListItem> GetDonationCentersList()
-        {
-            return db.donationCenters
+        private List<SelectListItem> GetDonationCentersList() => db.donationCenters
               .Select(e => new SelectListItem
               {
                   Value = e.idCenter.ToString(),
                   Text = e.name
               })
              .ToList();
-        }
 
         // GET: DonatingForm
         public ActionResult Index()
@@ -53,20 +50,42 @@ namespace B6C2.Controllers
             Boolean drinking = donatingForm.drink;
             Boolean intervention = donatingForm.intervention;
             Boolean affections = donatingForm.affections;
+
+            var donorTransactions = from row in db.donorTransactions.ToArray()
+                                    where row.cnpDonor == donatingForm.cnp
+                                    select row.donationDate;
+
+            if (donorTransactions.Last().HasValue)
+            {
+
+                var lastTransaction = donorTransactions.Last() ?? DateTime.Now.Date;
+
+                var today = DateTime.Now.Date;
+                TimeSpan daysBetweenDonations = today.Subtract(value: lastTransaction.Date);
+
+                if (daysBetweenDonations.Days <= 90)
+                {
+                    TempData["ConditionsNotMet"] = "Sorry, the minimum period of time between two donations is 90 days!";
+                    return RedirectToAction("CreateDonatingForm", "DonatingForm");
+                }
+
+            }
+
             if (age >= 18 && age <= 60 && weight >= 50 && pulse >= 60 && pulse <= 100 && !pregnancy && !drinking && !intervention && !affections)
             {
                 donorTransaction d = new donorTransaction();
                 d.cnpDonor = donatingForm.cnp;
                 d.idCenter = donatingForm.idCenter;
                 d.status = "Prelevare";
+                d.donationDate = DateTime.Now.Date;
                 db.donorTransactions.Add(d);
                 db.SaveChanges();
                 int idTransaction = db.donorTransactions.Find(d.cnpDonor).id;
                 TempData["Success"] = "Your request for donating blood has been submitted! The id of your transaction is " + idTransaction;
-                return RedirectToAction("DonationCenterIndex", "DonationCenter");
+                return RedirectToAction("CreateDonatingForm", "DonatingForm");
             }
             TempData["ConditionsNotMet"] = "Sorry, the conditions to donate cannot be applied in your case!";
-            return RedirectToAction("DonationCenterIndex", "DonationCenter");
+            return RedirectToAction("CreateDonatingForm", "DonatingForm");
         }
     }
 }
