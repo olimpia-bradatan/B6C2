@@ -65,7 +65,8 @@ namespace B6C2.Controllers
 
                 if (daysBetweenDonations.Days <= 90)
                 {
-                    TempData["ConditionsNotMet"] = "Sorry, the minimum period of time between two donations is 90 days!";
+                    var nextPossibleDate = lastTransaction.AddDays(90);
+                    TempData["ConditionsNotMet"] = "Sorry, the minimum period of time between two donations is 90 days! The next date you can donate is: " + nextPossibleDate.Date + ".";
                     return RedirectToAction("CreateDonatingForm", "DonatingForm");
                 }
 
