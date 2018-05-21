@@ -45,6 +45,9 @@ namespace B6C2.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [Display(Name = "Blood group")]
+        public int idBlood { get; set; }
+
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
@@ -91,6 +94,10 @@ namespace B6C2.Models
         public string Email { get; set; }
 
         [Required]
+        [Display(Name = "Hospital")]
+        public int idHospital { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -122,6 +129,10 @@ namespace B6C2.Models
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
+
+        [Required]
+        [Display(Name = "Center")]
+        public int idCenter { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]

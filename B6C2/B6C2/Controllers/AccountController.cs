@@ -15,8 +15,30 @@ using PC.CustomLibraries;
 namespace B6C2.Controllers
 {
     public class AccountController : Controller
-    { 
+    {
         ISSContext db = new ISSContext();
+
+        private System.Collections.Generic.List<SelectListItem> GetDonationCentersList()
+        {
+            return db.donationCenters
+              .Select(e => new SelectListItem
+              {
+                  Value = e.idCenter.ToString(),
+                  Text = e.name
+              })
+             .ToList();
+        }
+
+        private System.Collections.Generic.List<SelectListItem> GetHospitalsList()
+        {
+            return db.Hospitals
+              .Select(e => new SelectListItem
+              {
+                  Value = e.idHospital.ToString(),
+                  Text = e.name
+              })
+             .ToList();
+        }
 
         public AccountController()
         {
@@ -62,7 +84,10 @@ namespace B6C2.Controllers
                         var materName1 = getName1.ToList();
                         var lastName = materName1[0];
 
-                        name = firstName + " " + lastName;
+                        var getCentreId = db.Donors.Where(u => u.email == user.Email).Select(u => u.idCenter);
+                        var materId = getCentreId.ToList();
+                        var centreID = materId[0];
+                        name = centreID+firstName + " " + lastName;
                     }
                     else
                     {
@@ -76,7 +101,10 @@ namespace B6C2.Controllers
                             var materName1 = getName1.ToList();
                             var lastName = materName1[0];
 
-                            name = firstName + " " + lastName;
+                            var getCentreId = db.Medics.Where(u => u.email == user.Email).Select(u => u.idHospital);
+                            var materId = getCentreId.ToList();
+                            var centreID = materId[0];
+                            name = centreID+firstName + " " + lastName;
                         }
                         else
                         {
@@ -90,7 +118,10 @@ namespace B6C2.Controllers
                                 var materName1 = getName1.ToList();
                                 var lastName = materName1[0];
 
-                                name = firstName + " " + lastName;
+                                var getCentreId = db.centerEmployees.Where(u => u.email == user.Email).Select(u => u.idCenter);
+                                var materId = getCentreId.ToList();
+                                var centreID = materId[0];
+                                name = centreID+firstName + " " + lastName;
                             }
                         }
                     }
@@ -198,6 +229,7 @@ namespace B6C2.Controllers
         [AllowAnonymous]
         public ActionResult RegisterMedic()
         {
+            ViewBag.Hospitals = new SelectList(GetHospitalsList(), "Value", "Text");
             return View();
         }
 
@@ -220,6 +252,7 @@ namespace B6C2.Controllers
                     medic.firstName = user.firstName;
                     medic.lastName = user.lastName;
                     medic.email = user.Email;
+                    medic.idHospital = user.idHospital;
                     db.Medics.Add(medic);
 
                     var userDb = new AspNetUser();
@@ -258,6 +291,7 @@ namespace B6C2.Controllers
         [AllowAnonymous]
         public ActionResult RegisterCentreEmployee()
         {
+            ViewBag.DonationCenters = new SelectList(GetDonationCentersList(), "Value", "Text");
             return View();
         }
 
@@ -280,6 +314,7 @@ namespace B6C2.Controllers
                     employee.firstName = user.firstName;
                     employee.lastName = user.lastName;
                     employee.email = user.Email;
+                    employee.idCenter = user.idCenter;
                     db.centerEmployees.Add(employee);
 
                     var userDb = new AspNetUser();

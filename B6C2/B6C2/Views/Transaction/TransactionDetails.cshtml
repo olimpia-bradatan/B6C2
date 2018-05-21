@@ -68,3 +68,18 @@
 
     </dl>
 </div>
+
+@if (User.IsInRole("CenterEmployee"))
+{
+<p>
+    @Html.ActionLink("Edit", "MedicEdit", new { id = Model.idTransaction }) |
+    @Html.ActionLink("Back to the transactions", "TransactionIndex", "Transaction")
+</p>
+}
+
+@if (User.IsInRole("Medic"))
+{
+    <p>
+        @Html.ActionLink("Back to the transactions", "TransactionIndex", "Transaction")
+    </p>
+}

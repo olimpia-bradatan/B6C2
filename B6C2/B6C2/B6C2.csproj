@@ -226,10 +226,12 @@
     <Compile Include="Controllers\DonationCenterController.cs" />
     <Compile Include="Controllers\DonorController.cs" />
     <Compile Include="Controllers\DonorNormController.cs" />
+    <Compile Include="Controllers\donorTransactionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HospitalController.cs" />
     <Compile Include="Controllers\MedicController.cs" />
     <Compile Include="Controllers\RequestBloodController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="CustomLibraries\CustomDecrypt.cs" />
     <Compile Include="CustomLibraries\CustomEncrypt.cs" />
     <Compile Include="donationCenter.cs">
@@ -381,6 +383,11 @@
     <Content Include="Views\Account\RegisterDonor.cshtml" />
     <Content Include="Views\Account\RegisterMedic.cshtml" />
     <Content Include="Views\CenterEmployees\SendEmail.cshtml" />
+    <Content Include="Views\Transaction\TransactionDetails.cshtml" />
+    <Content Include="Views\Transaction\TransactionEdit.cshtml" />
+    <Content Include="Views\Transaction\TransactionIndex.cshtml" />
+    <Content Include="Views\donorTransaction\DonorTransactionIndex.cshtml" />
+    <Content Include="Views\donorTransaction\DonorTransactionEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

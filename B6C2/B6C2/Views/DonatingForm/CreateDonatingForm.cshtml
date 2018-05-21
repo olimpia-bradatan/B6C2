@@ -16,7 +16,7 @@
 
 @if (TempData["ConditionsNotMet"] != null)
 {
-    <div class="alert alert-success alert-dismissible" role="alert">
+    <div class="alert alert-danger alert-dismissible" role="alert">
         @TempData["ConditionsNotMet"].ToString()
     </div>
     TempData["ConditionsNotMet"] = null;
@@ -185,7 +185,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Submit" class="btn btn-default" />
             </div>
         </div>
     </div>

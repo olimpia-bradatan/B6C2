@@ -11,19 +11,24 @@ namespace B6C2.Controllers
     public class CenterEmployeesController : Controller
     {
         ISSContext db = new ISSContext();
+
+
         // GET: DonationCenterEmployees
+        [Authorize(Roles = "Admin")]
         public ActionResult CenterEmployeesIndex()
         {
             return View(db.centerEmployees.ToList());
         }
 
         // GET: DonationCenterEmployees/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult CenterEmployeesDetails(int id)
         {
             return View(db.centerEmployees.Find(id));
         }
 
         // GET: DonationCenterEmployees/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult CenterEmployeesCreate()
         {
             return View();
@@ -31,6 +36,7 @@ namespace B6C2.Controllers
 
         // POST: DonationCenterEmployees/Create
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult CenterEmployeesCreate(centerEmployee centerEmployee)
         {
             if (ModelState.IsValid)
@@ -60,6 +66,7 @@ namespace B6C2.Controllers
         }
 
         // GET: DonationCenterEmployees/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult CenterEmployeesEdit(int id)
         {
             return View(db.centerEmployees.Find(id));
@@ -67,6 +74,7 @@ namespace B6C2.Controllers
 
         // POST: DonationCenterEmployees/Edit/5
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult CenterEmployeesEdit(int id, centerEmployee centerEmployee)
         {
             try
@@ -83,6 +91,7 @@ namespace B6C2.Controllers
         }
 
         // GET: DonationCenterEmployees/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult CenterEmployeesDelete(int id)
         {
             return View(db.centerEmployees.Find(id));
@@ -90,6 +99,7 @@ namespace B6C2.Controllers
 
         // POST: DonationCenterEmployees/Delete/5
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult CenterEmployeesDelete(int id, centerEmployee centerEmployee)
         {
             try
@@ -111,6 +121,7 @@ namespace B6C2.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "CentreEmployee")]
         public ActionResult SendEmail(Donor donor)
         {
             try

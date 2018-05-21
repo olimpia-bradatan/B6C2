@@ -11,6 +11,7 @@ namespace B6C2.Controllers
     {
         ISSContext db = new ISSContext();
         // GET: ReguestBlood/Create
+        [Authorize(Roles = "Medic")]
         public ActionResult RequestBloodCreate()
         {
             return View();
@@ -18,6 +19,7 @@ namespace B6C2.Controllers
 
         // POST: RequestBlood/Create
         [HttpPost]
+        [Authorize(Roles = "Medic")]
         public ActionResult RequestBloodCreate(RequestBlood req)
         {
 
@@ -34,7 +36,7 @@ namespace B6C2.Controllers
                 db.Transactions.Add(t);
                 db.SaveChanges();
                 TempData["Success"] = "Request blood submitted!";
-                return RedirectToAction("MedicIndex", "Medic");
+                return RedirectToAction("Index", "Home");
             }
             return View();
         }

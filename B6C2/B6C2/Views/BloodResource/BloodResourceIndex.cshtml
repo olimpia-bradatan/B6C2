@@ -32,23 +32,31 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Blood.group)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.donationCenter.name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "EditBloodResource", new { CenterID=item.idCenter, BloodID=item.idBlood }) |
-            @Html.ActionLink("Details", "DetailsBloodResource", new { CenterID=item.idCenter,BloodID=item.idBlood }) |
-            @Html.ActionLink("Delete", "DeleteBloodResource", new { CenterID = item.idCenter, BloodID = item.idBlood })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        if (item.idCenter.ToString() == User.Identity.Name.ToString().Substring(0, 1))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Blood.group)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.donationCenter.name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditBloodResource", new { CenterID = item.idCenter, BloodID = item.idBlood }) |
+                    @Html.ActionLink("Details", "DetailsBloodResource", new { CenterID = item.idCenter, BloodID = item.idBlood }) |
+                    @Html.ActionLink("Delete", "DeleteBloodResource", new { CenterID = item.idCenter, BloodID = item.idBlood })
+                </td>
+            </tr>
+        }
+
+    }
 
 </table>
+<p>
+    @Html.ActionLink("Go back to home", "Index", "Home")
+</p>

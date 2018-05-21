@@ -2173,8 +2173,8 @@ fieldset[disabled] .btn-warning.active {
 
 .btn-danger {
   color: #ffffff;
-  background-color: #d9534f;
-  border-color: #d43f3a;
+  background-color: #bf2a2a;
+  border-color: #bf2a2a;    
 }
 
 .btn-danger:hover,
@@ -3828,12 +3828,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .nav > li.disabled > a {
-  color: #999999;
+  color: #fff;
 }
 
 .nav > li.disabled > a:hover,
 .nav > li.disabled > a:focus {
-  color: #999999;
+  color: #fff;
   text-decoration: none;
   cursor: not-allowed;
   background-color: transparent;
@@ -4240,6 +4240,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-nav {
   margin: 7.5px -15px;
+  color:#fff;
 }
 
 .navbar-nav > li > a {
@@ -4501,7 +4502,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse {
-  background-color: #222222;
+  background-color: #bf2a2a;
   border-color: #080808;
 }
 
@@ -4520,12 +4521,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse .navbar-nav > li > a {
-  color: #999999;
+  color: #fff;
 }
 
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
-  color: #ffffff;
+  color: #000;
   background-color: transparent;
 }
 
@@ -4929,12 +4930,13 @@ a.list-group-item.active > .badge,
 
 .jumbotron {
   padding: 30px;
+  margin-top: 30px;
   margin-bottom: 30px;
   font-size: 21px;
   font-weight: 200;
   line-height: 2.1428571435;
-  color: inherit;
-  background-color: #eeeeee;
+  color: white;
+  background-color: #bf2a2a;
 }
 
 .jumbotron h1 {

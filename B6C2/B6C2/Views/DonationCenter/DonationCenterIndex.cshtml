@@ -30,6 +30,8 @@
 
     @foreach (var item in Model)
     {
+        if(item.idCenter.ToString() == User.Identity.Name.ToString().Substring(0,1))
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.name)
@@ -45,6 +47,7 @@
                 @Html.ActionLink("Looking for donors", "DonorNormIndex", "DonorNorm",  new { id = item.idCenter }, null)
             </td>
         </tr>
+        }
     }
 
 </table>

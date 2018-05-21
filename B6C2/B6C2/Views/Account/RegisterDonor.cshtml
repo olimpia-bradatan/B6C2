@@ -23,6 +23,26 @@
             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
         </div>
     </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.idBlood, "Blood", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("idBlood", new List<SelectListItem>
+               {
+                new SelectListItem { Text = "Group: 0, Rh: +", Value = "1"},
+                new SelectListItem { Text = "Group: 0, Rh: -", Value = "2"},
+                new SelectListItem { Text = "Group: A, Rh: +", Value = "3"},
+                new SelectListItem { Text = "Group: A, Rh: -", Value = "4"},
+                new SelectListItem { Text = "Group: B, Rh: +", Value = "5"},
+                new SelectListItem { Text = "Group: B, Rh: -", Value = "6"},
+                new SelectListItem { Text = "Group: AB, Rh: +", Value = "7"},
+                new SelectListItem { Text = "Group: AB, Rh: -", Value = "8"},
+               }, "Select Blood group and Rh")
+            @Html.ValidationMessageFor(model => model.idBlood, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
     <div class="form-group">
         @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">

@@ -4,18 +4,12 @@
     ViewBag.Title = "TransactionIndex";
 }
 
-<h2>TransactionIndex</h2>
+<h2>Transactions</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.quantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.status)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Blood.group)
@@ -35,33 +29,34 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Blood.group)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.donationCenter.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hospital.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Patient.firstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.status)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.idTransaction })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Blood.group)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.donationCenter.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hospital.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "TransactionDetails", "Transaction", new { id = item.idTransaction }, null)
+            </td>
+        </tr>
+    }
 
 </table>
+<p>
+    @Html.ActionLink("Go back to home", "Index", "Home")
+</p>

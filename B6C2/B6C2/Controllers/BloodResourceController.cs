@@ -23,21 +23,24 @@ namespace B6C2.Controllers
         }
 
         // GET: bloodResource
+        [Authorize(Roles = "CentreEmployee")]
         public ActionResult BloodResourceIndex()
         {
             return View(db.bloodResources.ToList());
         }
 
         // GET: bloodResource/Details/5
+        [Authorize(Roles = "CentreEmployee")]
         public ActionResult DetailsBloodResource(int CenterID, int BloodID)
         {
             bloodResource a = db.bloodResources.Find(CenterID, BloodID);
             return View(a);
             
         }
-       
+
 
         // GET: bloodResource/Create
+        [Authorize(Roles = "CentreEmployee")]
         public ActionResult CreateBloodResource()
         {
             ViewBag.DonationCenters = new SelectList(GetDonationCentersList(), "Value", "Text");
@@ -46,6 +49,7 @@ namespace B6C2.Controllers
 
         // POST: bloodResource/Create
         [HttpPost]
+        [Authorize(Roles = "CentreEmployee")]
         public ActionResult CreateBloodResource(bloodResource bloodresource)
         {
             if(ModelState.IsValid)
@@ -75,6 +79,7 @@ namespace B6C2.Controllers
         }
 
         // GET: bloodResource/Edit/5
+        [Authorize(Roles = "CentreEmployee")]
         public ActionResult EditBloodResource(int CenterID, int BloodID)
         {
             bloodResource a = db.bloodResources.Find(CenterID, BloodID);
@@ -83,6 +88,7 @@ namespace B6C2.Controllers
 
         // POST: bloodResource/Edit/5
         [HttpPost]
+        [Authorize(Roles = "CentreEmployee")]
         public ActionResult EditBloodResource(int CenterID, int BloodID, bloodResource br)
         {
             try
@@ -99,6 +105,7 @@ namespace B6C2.Controllers
         }
 
         // GET: bloodResource/Delete/5
+        [Authorize(Roles = "CentreEmployee")]
         public ActionResult DeleteBloodResource(int CenterID, int BloodID)
         {
             bloodResource a = db.bloodResources.Find(CenterID, BloodID);
@@ -107,6 +114,7 @@ namespace B6C2.Controllers
 
         // POST: bloodResource/Delete/5
         [HttpPost]
+        [Authorize(Roles = "CentreEmployee")]
         public ActionResult DeleteBloodResource(int CenterID, int BloodID, bloodResource br)
         {
             try

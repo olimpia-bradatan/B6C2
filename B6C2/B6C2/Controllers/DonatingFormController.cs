@@ -32,6 +32,7 @@ namespace B6C2.Controllers
         }
 
         // GET: DonatingForm/Create
+        [Authorize(Roles = "Donor")]
         public ActionResult CreateDonatingForm()
         {
             ViewBag.DonationCenters = new SelectList(GetDonationCentersList(), "Value", "Text");
@@ -40,6 +41,7 @@ namespace B6C2.Controllers
 
         // POST: DonatingForm/Create
         [HttpPost]
+        [Authorize(Roles = "Donor")]
         public ActionResult CreateDonatingForm(DonatingForm donatingForm)
         {
             ViewBag.DonationCenters = new SelectList(GetDonationCentersList(), "Value", "Text");
@@ -55,21 +57,25 @@ namespace B6C2.Controllers
                                     where row.cnpDonor == donatingForm.cnp
                                     select row.donationDate;
 
-            if (donorTransactions.Last().HasValue)
-            {
+            if (donorTransactions.ToList().Count > 0)
+            { 
 
-                var lastTransaction = donorTransactions.Last() ?? DateTime.Now.Date;
-
-                var today = DateTime.Now.Date;
-                TimeSpan daysBetweenDonations = today.Subtract(value: lastTransaction.Date);
-
-                if (daysBetweenDonations.Days <= 90)
+                if (donorTransactions.Last().HasValue)
                 {
-                    var nextPossibleDate = lastTransaction.AddDays(90);
-                    TempData["ConditionsNotMet"] = "Sorry, the minimum period of time between two donations is 90 days! The next date you can donate is: " + nextPossibleDate.Date + ".";
-                    return RedirectToAction("CreateDonatingForm", "DonatingForm");
-                }
 
+                    var lastTransaction = donorTransactions.Last() ?? DateTime.Now.Date;
+
+                    var today = DateTime.Now.Date;
+                    TimeSpan daysBetweenDonations = today.Subtract(value: lastTransaction.Date);
+
+                    if (daysBetweenDonations.Days <= 90)
+                    {
+                        var nextPossibleDate = lastTransaction.AddDays(90);
+                        TempData["ConditionsNotMet"] = "Sorry, the minimum period of time between two donations is 90 days! The next date you can donate is: " + nextPossibleDate.Date + ".";
+                        return RedirectToAction("CreateDonatingForm", "DonatingForm");
+                    }
+
+                }
             }
 
             if (age >= 18 && age <= 60 && weight >= 50 && pulse >= 60 && pulse <= 100 && !pregnancy && !drinking && !intervention && !affections)
@@ -78,10 +84,12 @@ namespace B6C2.Controllers
                 d.cnpDonor = donatingForm.cnp;
                 d.idCenter = donatingForm.idCenter;
                 d.status = "Prelevare";
+                Donor donor = db.Donors.Find(donatingForm.cnp);
+                donor.idCenter = donatingForm.idCenter;
                 d.donationDate = DateTime.Now.Date;
                 db.donorTransactions.Add(d);
                 db.SaveChanges();
-                int idTransaction = db.donorTransactions.Find(d.cnpDonor).id;
+                int idTransaction = db.donorTransactions.Where(a => a.cnpDonor == donatingForm.cnp).FirstOrDefault().id;
                 TempData["Success"] = "Your request for donating blood has been submitted! The id of your transaction is " + idTransaction;
                 return RedirectToAction("CreateDonatingForm", "DonatingForm");
             }

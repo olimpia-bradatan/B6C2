@@ -3,15 +3,22 @@
 }
 
 <div class="jumbotron text-center">
-    <h1>Medical Centre</h1>
-    <p class="lead"> This is the description of this medical centre!</p>
+    <h1>Blood Gestion Application</h1>
+    <p class="lead"> The purpose of this application is to manage the relationship between donors, medics and donation centres.</p>
 </div>
 @if (TempData["SuccessRegistration"] != null)
 {
     <div class="alert alert-success" role="alert">
-        @TempData["SuccessRegistration"].ToString() @User.Identity.Name
+        @TempData["SuccessRegistration"].ToString() @User.Identity.Name.ToString().Substring(1)
     </div>
     TempData["SuccessRegistration"] = null;
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible" role="alert">
+        @TempData["Success"].ToString()
+    </div>
+    TempData["Success"] = null;
 }
 <div class="container">
     <div class="row">
@@ -19,21 +26,21 @@
         {
             <div class="col-sm-4">
                 <h6>First time here? Register as a new donor</h6>
-                <button type="button" class="btn btn-primary" onclick="location.href= '@Url.Action("RegisterDonor", "Account")'">Register</button>
+                <button type="button" class="btn btn-danger" onclick="location.href= '@Url.Action("RegisterDonor", "Account")'">Register</button>
             </div>
             <div class="col-sm-4">
                 <h6>First time here? Register as a new medic</h6>
-                <button type="button" class="btn btn-primary" onclick="location.href= '@Url.Action("RegisterMedic", "Account")'">Register</button>
+                <button type="button" class="btn btn-danger" onclick="location.href= '@Url.Action("RegisterMedic", "Account")'">Register</button>
             </div>
 
             <div class="col-sm-4">
                 <h6>First time here? Register as a new employee</h6>
-                <button type="button" class="btn btn-primary" onclick="location.href= '@Url.Action("RegisterCentreEmployee", "Account")'">Register</button>
+                <button type="button" class="btn btn-danger" onclick="location.href= '@Url.Action("RegisterCentreEmployee", "Account")'">Register</button>
             </div>
 
             <div class="col-sm-10">
                 <h6>Login</h6>
-                <button type="button" class="btn btn-primary" onclick="location.href= '@Url.Action("Login", "Account")'">Login</button>
+                <button type="button" class="btn btn-danger" onclick="location.href= '@Url.Action("Login", "Account")'">Login</button>
             </div>
         }
     </div>
