@@ -1,3 +1,12 @@
+INSERT INTO [dbo].[AspNetRole]
+VALUES ('Donor');
+
+INSERT INTO [dbo].[AspNetRole]
+VALUES ('CentreEmployee');
+
+INSERT INTO [dbo].[AspNetRole]
+VALUES ('Medic');
+
 
 -- Populating donationCenter
 
