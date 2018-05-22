@@ -57,7 +57,7 @@ namespace B6C2.Controllers
                                     select row.donationDate;
             int idCenter = donatingForm.idCenter;
             Donor donor1 = db.Donors.Find(donatingForm.cnp);
-            donor1.idCenter = idCenter;
+            donor1.idCenter = donatingForm.idCenter;
 
             db.Entry(donor1).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
