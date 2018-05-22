@@ -180,7 +180,7 @@ namespace B6C2.Controllers
                 if (ModelState.IsValid)
                 {
                     var encryptedPassword = CustomEncrypt.Encrypt(user.Password);
-                    if (db.AspNetUsers.FirstOrDefault(o => o.Email == user.Email) != null)
+                    if (db.AspNetUsers.FirstOrDefault(o => o.Email == user.Email) != null || db.Donors.FirstOrDefault(o => o.cnp == user.CNP) != null)
                     {
                         TempData["UserAlreadyExists"] = "This donor already exists";
                         return View(user);
