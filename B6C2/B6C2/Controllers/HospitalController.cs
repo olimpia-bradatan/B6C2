@@ -24,6 +24,7 @@ namespace B6C2.Controllers
         }
 
         // GET: Donor/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult HospitalCreate()
         {
             return View();
@@ -31,6 +32,7 @@ namespace B6C2.Controllers
 
         // POST: Donor/Create
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult HospitalCreate( Hospital hospital )
         {
             if (ModelState.IsValid)
@@ -60,6 +62,7 @@ namespace B6C2.Controllers
         }
 
         // GET: Donor/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult HospitalEdit(int id)
         {
             return View(db.Hospitals.Find(id));
@@ -67,6 +70,7 @@ namespace B6C2.Controllers
 
         // POST: Donor/Edit/5
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult HospitalEdit(int id, Hospital hospital)
         {
             try
@@ -83,6 +87,7 @@ namespace B6C2.Controllers
         }
 
         // GET: Donor/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult HospitalDelete(int id)
         {
             return View(db.Hospitals.Find(id));
@@ -90,6 +95,7 @@ namespace B6C2.Controllers
 
         // POST: Donor/Delete/5
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult HospitalDelete(int id, Hospital hospital)
         {
             try

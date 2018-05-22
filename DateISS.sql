@@ -7,6 +7,9 @@ VALUES ('CentreEmployee');
 INSERT INTO [dbo].[AspNetRole]
 VALUES ('Medic');
 
+INSERT INTO [dbo].[AspNetRole]
+VALUES ('Admin');
+
 
 -- Populating donationCenter
 

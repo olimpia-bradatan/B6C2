@@ -73,7 +73,7 @@ namespace B6C2.Controllers
                 else
                 {
                     TempData["Warning"] = "Blood resource already exists! Try add another one!";
-                    return RedirectToAction("CreateBloodRescource");
+                    return RedirectToAction("CreateBloodResource");
                 }
             }
             return View();

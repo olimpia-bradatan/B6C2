@@ -5,7 +5,6 @@
 }
 
 <h2>Your previous donations</h2>
-
 <table class="table">
     <tr>
         <th>
@@ -31,32 +30,66 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Donor.firstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Donor.lastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.donationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.donationCenter.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.analysisStatus)
-            </td>
-            @if (User.IsInRole("CentreEmployee"))
+        if (User.IsInRole("Donor"))
+        {
+            var name = item.Donor.firstName + " " + item.Donor.lastName;
+            if (@User.Identity.Name.ToString().Substring(1) == name)
             {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Donor.firstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Donor.lastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.donationDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.donationCenter.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.analysisStatus)
+                    </td>
+                    @if (User.IsInRole("CentreEmployee"))
+                    {
+                        <td>
+                            @Html.ActionLink("Modify status", "donorTransactionEdit", new { id = item.id })
+                        </td>
+                    }
+                </tr>
+            }
+        }
+        if (User.IsInRole("CentreEmployee"))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Donor.firstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Donor.lastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.donationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.donationCenter.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.analysisStatus)
+                </td>
                 <td>
                     @Html.ActionLink("Modify status", "donorTransactionEdit", new { id = item.id })
                 </td>
-            }
-        </tr>
+            </tr>
+        }
     }
 
 </table>
+

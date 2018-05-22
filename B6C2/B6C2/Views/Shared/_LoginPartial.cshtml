@@ -6,7 +6,14 @@
         @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
-            <li>@Html.ActionLink("Hello " + User.Identity.Name.ToString().Substring(1) + "!", "Index", "Home", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            @if (User.IsInRole("Admin"))
+            {
+                <li>@Html.ActionLink("Hello Admin!", "Index", "Home", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            }
+            else
+            {
+                <li>@Html.ActionLink("Hello " + User.Identity.Name.ToString().Substring(1) + "!", "Index", "Home", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            }
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Logout</a></li>
         </ul>
     }

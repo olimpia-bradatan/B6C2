@@ -9,7 +9,14 @@
 @if (TempData["SuccessRegistration"] != null)
 {
     <div class="alert alert-success" role="alert">
-        @TempData["SuccessRegistration"].ToString() @User.Identity.Name.ToString().Substring(1)
+        @if (User.IsInRole("Admin"))
+        {
+            <p>You signed in into your account as admin</p>
+        }
+        else
+        {
+            @TempData["SuccessRegistration"].ToString() @User.Identity.Name.ToString().Substring(1)
+        }
     </div>
     TempData["SuccessRegistration"] = null;
 }

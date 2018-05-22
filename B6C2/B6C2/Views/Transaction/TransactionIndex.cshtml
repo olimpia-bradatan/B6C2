@@ -4,7 +4,7 @@
     ViewBag.Title = "TransactionIndex";
 }
 
-<h2>Transactions</h2>
+<h2>Transactions' List</h2>
 
 <table class="table">
     <tr>
@@ -21,10 +21,10 @@
             @Html.DisplayNameFor(model => model.donationCenter.name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Hospital.name)
+            @Html.DisplayNameFor(model => model.status)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.status)
+            @Html.DisplayNameFor(model => model.severity)
         </th>
         <th></th>
     </tr>
@@ -45,10 +45,10 @@
                 @Html.DisplayFor(modelItem => item.donationCenter.name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Hospital.name)
+                @Html.DisplayFor(modelItem => item.status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.status)
+                @Html.DisplayFor(modelItem => item.severity)
             </td>
             <td>
                 @Html.ActionLink("Details", "TransactionDetails", "Transaction", new { id = item.idTransaction }, null)

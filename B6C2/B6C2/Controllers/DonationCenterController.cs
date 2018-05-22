@@ -23,6 +23,7 @@ namespace B6C2.Controllers
         }
 
         // GET: DonationCenter/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult DonationCenterCreate()
         {
             return View();
@@ -30,6 +31,7 @@ namespace B6C2.Controllers
 
         // POST: DonationCenter/Create
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult DonationCenterCreate(donationCenter donationCenter)
         {
             if (ModelState.IsValid)
@@ -59,6 +61,7 @@ namespace B6C2.Controllers
         }
 
         // GET: DonationCenter/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult DonationCenterEdit(int id)
         {
             return View(db.donationCenters.Find(id));

@@ -31,7 +31,6 @@
                     {
                         <li>@Html.ActionLink("Request Blood", "RequestBloodCreate", "RequestBlood")</li>
                         <li>@Html.ActionLink("Transactions states", "TransactionIndex", "Transaction")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     }
                     @if (User.IsInRole("CentreEmployee"))
                     {
@@ -40,6 +39,11 @@
                         <li>@Html.ActionLink("Nearest donors", "DonationCenterIndex", "DonationCenter")</li>
                         <li>@Html.ActionLink("Donor transactions", "donorTransactionIndex", "donorTransaction")</li>
                         <li>@Html.ActionLink("Hospitals requests", "TransactionIndex", "Transaction")</li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Manage donation centers", "DonationCenterIndex", "DonationCenter")</li>
+                        <li>@Html.ActionLink("Manage hospitals", "HospitalIndex", "Hospital")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

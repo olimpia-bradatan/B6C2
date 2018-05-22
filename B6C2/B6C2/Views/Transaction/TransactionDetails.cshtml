@@ -4,10 +4,9 @@
     ViewBag.Title = "TransactionDetails";
 }
 
-<h2>TransactionDetails</h2>
+<h2>Transaction Details</h2>
 
 <div>
-    <h4>Transaction</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -64,6 +63,13 @@
 
         <dd>
             @Html.DisplayFor(model => model.status)
+        </dd>
+         <dt>
+            @Html.DisplayNameFor(model => model.severity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.severity)
         </dd>
 
     </dl>

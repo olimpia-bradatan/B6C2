@@ -83,11 +83,8 @@ namespace B6C2.Controllers
                         var getName1 = db.Donors.Where(u => u.email == user.Email).Select(u => u.lastName);
                         var materName1 = getName1.ToList();
                         var lastName = materName1[0];
-
-                        var getCentreId = db.Donors.Where(u => u.email == user.Email).Select(u => u.idCenter);
-                        var materId = getCentreId.ToList();
-                        var centreID = materId[0];
-                        name = centreID+firstName + " " + lastName;
+                        
+                        name = "1"+firstName + " " + lastName;
                     }
                     else
                     {
@@ -122,6 +119,11 @@ namespace B6C2.Controllers
                                 var materId = getCentreId.ToList();
                                 var centreID = materId[0];
                                 name = centreID+firstName + " " + lastName;
+                            }
+                            else
+                            //role = admin
+                            {
+                                name = "1Admin";
                             }
                         }
                     }
