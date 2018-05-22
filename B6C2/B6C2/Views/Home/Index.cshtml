@@ -2,9 +2,34 @@
     ViewBag.Title = "HomePage";
 }
 
-<div class="jumbotron text-center">
-    <h1>Blood Gestion Application</h1>
-    <p class="lead"> The purpose of this application is to manage the relationship between donors, medics and donation centres.</p>
+<div class="jumbotron">
+
+    @if (!User.IsInRole("Donor"))
+    {
+        <h3>Why we need more blood donors…</h3>
+        <ul>
+            <li>There is no substitute for blood. The community supply depends on people like you.</li>
+            <li> Right now, not enough people donate blood. Only 4 people out of 100 who are able to donate blood do so.</li>
+            <li>The blood supply needs to be replenished constantly. Blood products have a short shelf life, from 5 to 42 days.</li>
+            <li> Blood is in constant demand for accident victims, surgery and cancer patients and more.</li>
+            <li>When you donate, you get a mini-examination, including a blood pressure reading, iron count, temperature and pulse check.</li>
+            <li> It is absolutely safe to donate blood. You cannot get any disease from donating blood.</li>
+            <li>Know that you gave "The Gift of Life" and those who receive that gift will be forever grateful.</li>
+        </ul>
+    }
+    else
+    {
+        <h3>The most important conditions in order to donate!</h3>
+        <ul>
+            <li>Age: 18 (16 and 17 year-olds can donate with a Minor Donor Permission Form signed by a parent or guardian).</li>
+            <li> Weight: At least 110 lbs. (different requirements for 16-22 year-olds – see Blood Donor Qualifications)</li>
+            <li> Health: General good health.</li>
+            <li>
+                Identification: Valid identification such as a driver’s license,
+                DMV identification card, passport, etc.
+            </li>
+        </ul>
+    }
 </div>
 @if (TempData["SuccessRegistration"] != null)
 {
@@ -28,27 +53,26 @@
     TempData["Success"] = null;
 }
 <div class="container">
-    <div class="row">
-        @if (!User.Identity.IsAuthenticated)
-        {
-            <div class="col-sm-4">
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <div class="row">
+            <div class="column" style="float: left;width: 25%;padding: 10px;height: 300px">
                 <h6>First time here? Register as a new donor</h6>
                 <button type="button" class="btn btn-danger" onclick="location.href= '@Url.Action("RegisterDonor", "Account")'">Register</button>
             </div>
-            <div class="col-sm-4">
+            <div class="column" style="float: left;width: 25%;padding: 10px;height: 300px">
                 <h6>First time here? Register as a new medic</h6>
                 <button type="button" class="btn btn-danger" onclick="location.href= '@Url.Action("RegisterMedic", "Account")'">Register</button>
             </div>
-
-            <div class="col-sm-4">
+            <div class="column" style="float: left;width: 25%;padding: 10px;height: 300px">
                 <h6>First time here? Register as a new employee</h6>
                 <button type="button" class="btn btn-danger" onclick="location.href= '@Url.Action("RegisterCentreEmployee", "Account")'">Register</button>
             </div>
 
-            <div class="col-sm-10">
-                <h6>Login</h6>
+            <div class="column" style="float: left;width:25%;padding: 10px;height: 300px">
+                <h6>Login with an existing account</h6>
                 <button type="button" class="btn btn-danger" onclick="location.href= '@Url.Action("Login", "Account")'">Login</button>
             </div>
-        }
-    </div>
+        </div>
+    }
 </div>

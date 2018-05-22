@@ -24,8 +24,8 @@
                     @if (User.IsInRole("Donor"))
                     {
                         <li>@Html.ActionLink("Donate!", "CreateDonatingForm", "DonatingForm")</li>
-                        <li>@Html.ActionLink("Donation status", "donorTransactionIndex", "donorTransaction")</li>
                         <li>@Html.ActionLink("My details", "DonorIndex", "Donor")</li>
+                        <li>@Html.ActionLink("Donation status", "donorTransactionIndex", "donorTransaction")</li>
                     }
                     @if (User.IsInRole("Medic"))
                     {

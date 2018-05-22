@@ -35,7 +35,7 @@
     @foreach (var item in Model)
     {
         var name = item.firstName + " " + item.lastName;
-        if (name == User.Identity.Name)
+        if (name == User.Identity.Name.ToString().Substring(1))
         {
             <tr>
                 <td>
