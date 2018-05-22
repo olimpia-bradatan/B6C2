@@ -21,6 +21,7 @@ namespace B6C2
         public int idHospital { get; set; }
         public Nullable<int> idPatient { get; set; }
         public string status { get; set; }
+        public string severity { get; set; }
     
         public virtual Blood Blood { get; set; }
         public virtual donationCenter donationCenter { get; set; }

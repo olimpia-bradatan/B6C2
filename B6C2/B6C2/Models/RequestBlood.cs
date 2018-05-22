@@ -9,7 +9,7 @@ namespace B6C2.Models
     public partial class RequestBlood
     {
         [Required]
-        [Display(Name = "Blood quantity ")]
+        [Display(Name = "Blood quantity*")]
 
         public int quantity { get; set; }
         [Required]
@@ -22,12 +22,16 @@ namespace B6C2.Models
         public int idHospital { get; set; }
 
         [Required]
-        [Display(Name = "Patient first name ")]
+        [Display(Name = "Severity*")]
+        public string severity { get; set; }
+
+        [Required]
+        [Display(Name = "Patient first name*")]
         public string firstName { get; set; }
 
 
         [Required]
-        [Display(Name = "Last name patient")]
+        [Display(Name = "Last name patient*")]
         public string lastName { get; set; }
       
 

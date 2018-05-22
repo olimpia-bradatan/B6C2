@@ -29,22 +29,22 @@ VALUES ('Unitatea de Primiri Urgente', ' , 3-5, Strada Clinicilor, , Cluj-Napoca
 
 
 INSERT INTO [dbo].[bloodResource]
-VALUES (10,1,2);
+VALUES (100,1,2);
 
 INSERT INTO [dbo].[bloodResource]
-VALUES (13,2,1);
+VALUES (130,2,1);
 
 INSERT INTO [dbo].[bloodResource]
-VALUES (15,3,5);
+VALUES (150,3,5);
 
 INSERT INTO [dbo].[bloodResource]
-VALUES (16,4,7);
+VALUES (160,4,7);
 
 INSERT INTO [dbo].[bloodResource]
-VALUES (20,5,6);
+VALUES (200,5,6);
 
 INSERT INTO [dbo].[bloodResource]
-VALUES (19,3,4);
+VALUES (190,3,4);
 
 -- Populating centerEmployee
 
@@ -137,13 +137,13 @@ VALUES ('Rares', 'Neacsu', '0', '+', 1)
 --Populating Transaction
 
 INSERT INTO [dbo].[Transaction]
-VALUES (500, 2, 2, 2, 2, 'Pregatire')
+VALUES (500, 2, 2, 2, 2, 'Pregatire', 'High')
 
 INSERT INTO [dbo].[Transaction]
-VALUES (700, 3, 3, 3, 3, 'Calificare')
+VALUES (700, 3, 3, 3, 3, 'Prelevare', 'Low')
 
 INSERT INTO [dbo].[Transaction]
-VALUES (685, 4, 4, 4, 4, 'Prelevare')
+VALUES (685, 4, 4, 4, 4, 'Prelevare', 'Medium')
 
 INSERT INTO [dbo].[Transaction]
-VALUES (549, 5, 5, 5, 5, 'Distribuire')
+VALUES (549, 5, 5, 5, 5, 'Distribuire', 'High')

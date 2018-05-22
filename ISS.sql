@@ -106,6 +106,7 @@ CREATE TABLE [dbo].[Transaction] (
     [idHospital] INT           NOT NULL,
 	[idPatient]  INT           NULL,
     [status]     VARCHAR (250) NOT NULL,
+	[severity]   VARCHAR (250) NOT NULL,
 	PRIMARY KEY CLUSTERED ([idTransaction] ASC),
     FOREIGN KEY ([idCenter]) REFERENCES [dbo].[donationCenter] ([idCenter]),
     FOREIGN KEY ([idBlood]) REFERENCES [dbo].[Blood] ([idBlood]),

@@ -65,6 +65,7 @@ namespace B6C2.Controllers
                 t.idCenter = req.idCenter;
                 t.idHospital = req.idHospital;
                 t.quantity = req.quantity;
+                t.severity = req.severity;
                 
                 db.Transactions.Add(t);
                 db.SaveChanges();

@@ -53,12 +53,41 @@ namespace B6C2.Controllers
                         tt.quantity = tt.quantity + 500;
                         db.Entry(tt).State = System.Data.Entity.EntityState.Modified;
 
-                        List<Transaction> transactionsList = new List<Transaction>();
+                        List<Transaction> transactionsListHigh = new List<Transaction>();
+                        List<Transaction> transactionsListMedium = new List<Transaction>();
+                        List<Transaction> transactionsListLow = new List<Transaction>();
                         foreach (Transaction t in db.Transactions.ToList())
                             if (t.idBlood == idBlood && t.idCenter == idCenter)
-                                transactionsList.Add(t);
+                            {
+                                if (t.severity == "High")
+                                    transactionsListHigh.Add(t);
+                                if (t.severity == "Medium")
+                                    transactionsListMedium.Add(t);
+                                if (t.severity == "Low")
+                                    transactionsListLow.Add(t);
+                            }
 
-                        foreach (Transaction t in transactionsList)
+                        foreach (Transaction t in transactionsListHigh)
+                            if (t.status == "Prelevare")
+                                if (t.quantity <= tt.quantity)
+                                {
+                                    t.status = "Pregatire";
+                                    db.Entry(t).State = System.Data.Entity.EntityState.Modified;
+                                    tt.quantity = tt.quantity - t.quantity;
+                                    db.Entry(tt).State = System.Data.Entity.EntityState.Modified;
+                                }
+
+                        foreach (Transaction t in transactionsListMedium)
+                            if (t.status == "Prelevare")
+                                if (t.quantity <= tt.quantity)
+                                {
+                                    t.status = "Pregatire";
+                                    db.Entry(t).State = System.Data.Entity.EntityState.Modified;
+                                    tt.quantity = tt.quantity - t.quantity;
+                                    db.Entry(tt).State = System.Data.Entity.EntityState.Modified;
+                                }
+
+                        foreach (Transaction t in transactionsListLow)
                             if (t.status == "Prelevare")
                                 if (t.quantity <= tt.quantity)
                                 {
