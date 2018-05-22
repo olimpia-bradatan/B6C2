@@ -8,15 +8,18 @@ namespace B6C2.Models
 {
     public partial class RequestBlood
     {
-        
-        public int idHospital { get; set; }
-
         [Required]
         [Display(Name = "Blood quantity ")]
 
         public int quantity { get; set; }
         [Required]
         public  int idBlood { get; set; }
+
+        [Required]
+        public int idCenter { get; set; }
+
+        [Required]
+        public int idHospital { get; set; }
 
         [Required]
         [Display(Name = "Patient first name ")]

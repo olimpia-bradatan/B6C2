@@ -22,7 +22,6 @@
                {
                 new SelectListItem { Text = "Prelevare", Value = "Prelevare"},
                 new SelectListItem { Text = "Pregatire", Value = "Pregatire"},
-                new SelectListItem { Text = "Calificare", Value = "Calificare" },
                 new SelectListItem { Text = "Distribuire", Value = "Distribuire"},
                }, "Select status")
                 @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
@@ -45,7 +44,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to the Transactions List", "TransactionIndex")
 </div>
 
 @section Scripts {

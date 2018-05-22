@@ -29,6 +29,9 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "DonationCenterEdit", new { id = Model.idCenter }) |
-    @Html.ActionLink("Back to your Donation Center List", "DonationCenterIndex")
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edit", "DonationCenterEdit", new { id = Model.idCenter })
+    }|
+    @Html.ActionLink("Back to the Donation Center List", "DonationCenterIndex")
 </p>

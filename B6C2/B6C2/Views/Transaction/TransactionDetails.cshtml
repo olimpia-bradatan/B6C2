@@ -69,10 +69,10 @@
     </dl>
 </div>
 
-@if (User.IsInRole("CenterEmployee"))
+@if (User.IsInRole("CentreEmployee"))
 {
 <p>
-    @Html.ActionLink("Edit", "MedicEdit", new { id = Model.idTransaction }) |
+    @Html.ActionLink("Edit", "TransactionEdit", new { id = Model.idTransaction }) |
     @Html.ActionLink("Back to the transactions", "TransactionIndex", "Transaction")
 </p>
 }

@@ -44,7 +44,6 @@ namespace B6C2.Controllers
         [Authorize(Roles = "Donor")]
         public ActionResult CreateDonatingForm(DonatingForm donatingForm)
         {
-            ViewBag.DonationCenters = new SelectList(GetDonationCentersList(), "Value", "Text");
             int age = donatingForm.age;
             int weight = donatingForm.weight;
             int pulse = donatingForm.pulse;
@@ -56,6 +55,12 @@ namespace B6C2.Controllers
             var donorTransactions = from row in db.donorTransactions.ToArray()
                                     where row.cnpDonor == donatingForm.cnp
                                     select row.donationDate;
+            int idCenter = donatingForm.idCenter;
+            Donor donor1 = db.Donors.Find(donatingForm.cnp);
+            donor1.idCenter = idCenter;
+
+            db.Entry(donor1).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
 
             if (donorTransactions.ToList().Count > 0)
             { 
@@ -88,10 +93,15 @@ namespace B6C2.Controllers
                 donor.idCenter = donatingForm.idCenter;
                 d.donationDate = DateTime.Now.Date;
                 db.donorTransactions.Add(d);
+                donationCenter center = db.donationCenters.Find(donatingForm.idCenter);
                 db.SaveChanges();
                 int idTransaction = db.donorTransactions.Where(a => a.cnpDonor == donatingForm.cnp).FirstOrDefault().id;
-                TempData["Success"] = "Your request for donating blood has been submitted! The id of your transaction is " + idTransaction;
-                return RedirectToAction("CreateDonatingForm", "DonatingForm");
+                TempData["Success"] = "Your request for donating blood has been submitted! The id of your transaction is " + idTransaction +
+                    ". < br /> Before donating, you can drink a coffee or a tea. You can also eat a light breakfast." +
+                    "< br /> Don't smoke before and after the donation for at least one hour!" +
+                    "< br /> Come to donate fresh, not tired!" +
+                    " < br /> We're waiting for you tomorrow between 7:00 and 11:00 at " + center.name;
+                return RedirectToAction("Index", "Home");
             }
             TempData["ConditionsNotMet"] = "Sorry, the conditions to donate cannot be applied in your case!";
             return RedirectToAction("CreateDonatingForm", "DonatingForm");

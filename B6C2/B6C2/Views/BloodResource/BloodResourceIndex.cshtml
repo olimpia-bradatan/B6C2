@@ -1,18 +1,18 @@
 ﻿@model IEnumerable<B6C2.bloodResource>
 
 @{
-    ViewBag.Title = "BloodResourceIndex";
+    ViewBag.Title = "Blood Resources";
 }
 
-<h2>BloodResourceIndex</h2>
+<h2>Blood Resources</h2>
 
 <p>
-    @Html.ActionLink("Create New", "CreateBloodResource")
+    @Html.ActionLink("Add new blood resource", "CreateBloodResource")
 </p>
 
 @if (TempData["Success"] != null)
 {
-    <div class="alert alert-warning alert-dismissible" role="alert">
+    <div class="alert alert-success alert-dismissible" role="alert">
         @TempData["Success"].ToString()
     </div>
     TempData["Success"] = null;
@@ -48,8 +48,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "EditBloodResource", new { CenterID = item.idCenter, BloodID = item.idBlood }) |
-                    @Html.ActionLink("Details", "DetailsBloodResource", new { CenterID = item.idCenter, BloodID = item.idBlood }) |
-                    @Html.ActionLink("Delete", "DeleteBloodResource", new { CenterID = item.idCenter, BloodID = item.idBlood })
+                    @Html.ActionLink("Details", "DetailsBloodResource", new { CenterID = item.idCenter, BloodID = item.idBlood }) 
                 </td>
             </tr>
         }

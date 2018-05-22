@@ -30,8 +30,48 @@ namespace B6C2.Controllers
         {
             try
             {
+                if (transaction.status == "Acceptat")
+                    transaction.analysisStatus = "Pozitive";
+                else
+                {
+                    if (transaction.status == "Rebutat")
+                        transaction.analysisStatus = "Negative";
+                }
+
+                if (transaction.status == "Acceptat")
+                {
+                    Donor d = db.Donors.Find(transaction.cnpDonor);
+                    if (d.idBlood != null)
+                    {
+                        int idBlood = (int)d.idBlood;
+                        int idCenter = (int)transaction.idCenter;
+                        bloodResource tt = new bloodResource();
+                        foreach (bloodResource t in db.bloodResources.ToList())
+                            if (t.idBlood == idBlood && t.idCenter == idCenter)
+                                tt = t;
+
+                        tt.quantity = tt.quantity + 500;
+                        db.Entry(tt).State = System.Data.Entity.EntityState.Modified;
+
+                        List<Transaction> transactionsList = new List<Transaction>();
+                        foreach (Transaction t in db.Transactions.ToList())
+                            if (t.idBlood == idBlood && t.idCenter == idCenter)
+                                transactionsList.Add(t);
+
+                        foreach (Transaction t in transactionsList)
+                            if (t.status == "Prelevare")
+                                if (t.quantity <= tt.quantity)
+                                {
+                                    t.status = "Pregatire";
+                                    db.Entry(t).State = System.Data.Entity.EntityState.Modified;
+                                    tt.quantity = tt.quantity - t.quantity;
+                                    db.Entry(tt).State = System.Data.Entity.EntityState.Modified;
+                                }
+                    }
+                }
                 db.Entry(transaction).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
+                
                 TempData["Success"] = "Donor transaction successfully updated!";
                 return RedirectToAction("DonorTransactionIndex");
             }

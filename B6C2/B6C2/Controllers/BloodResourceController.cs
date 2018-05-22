@@ -54,6 +54,7 @@ namespace B6C2.Controllers
         {
             if(ModelState.IsValid)
             {
+                bloodresource.idCenter = Int32.Parse( User.Identity.Name.ToString().Substring(0, 1));
                 BloodResourceComparer cmp = new BloodResourceComparer();
                 int ok = 1;
                 if (db.bloodResources.Count() > 0)

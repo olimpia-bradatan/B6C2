@@ -6,9 +6,6 @@
 
 <h2>Donors' List</h2>
 
-<p>
-    @Html.ActionLink("Add new donor", "DonorCreate")
-</p>
 
 @if (TempData["Success"] != null)
 {
@@ -35,26 +32,60 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.cnp)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.firstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.birthDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "DonorEdit", new { id=item.cnp }) |
-            @Html.ActionLink("Details", "DonorDetails", new { id=item.cnp }) |
-            @Html.ActionLink("Delete", "DonorDelete", new { id=item.cnp })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        var name = item.firstName + " " + item.lastName;
+        if (name == User.Identity.Name)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cnp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.firstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.birthDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "DonorEdit", new { id = item.cnp }) |
+                    @Html.ActionLink("Details", "DonorDetails", new { id = item.cnp })
+                </td>
+            </tr>
+        }
+        else
+        {
+            if (User.IsInRole("CentreEmployee"))
+            {
+                var centre = item.idCenter;
+                if (centre.ToString() == User.Identity.Name.ToString().Substring(0, 1))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cnp)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.firstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.lastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.birthDate)
+                        </td>
+                      
+                        <td>
+                            @Html.ActionLink("Edit", "DonorEdit", new { id = item.cnp }) |
+                            @Html.ActionLink("Details", "DonorDetails", new { id = item.cnp })
+                        </td>
+                    </tr>
+                }
+
+            }
+        }
+    }
 
 </table>

@@ -25,23 +25,10 @@
             <div class="col-md-10">
                 @Html.DropDownList("Status", new List<SelectListItem>
                {
-                new SelectListItem { Text = "Prelevare", Value = "Prelevare"},
                 new SelectListItem { Text = "Acceptat", Value = "Acceptat"},
-                new SelectListItem { Text = "Distrus", Value = "Distrus"},
+                new SelectListItem { Text = "Rebutat", Value = "Rebutat"},
                }, "Select the status of the donor transaction")
                 @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.analysisStatus, "Analysis Status", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("analysisStatus", new List<SelectListItem>
-               {
-                new SelectListItem { Text = "Analize pozitive", Value = "Pozitive"},
-                new SelectListItem { Text = "Analize negative", Value = "Negative"},
-               }, "Select the analysis status of the donor transaction")
-                @Html.ValidationMessageFor(model => model.analysisStatus, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -54,7 +41,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "DonorTransactionIndex")
 </div>
 
 @section Scripts {

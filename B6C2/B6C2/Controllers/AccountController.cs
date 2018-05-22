@@ -191,6 +191,8 @@ namespace B6C2.Controllers
                     donor.address = user.address;
                     donor.email = user.Email;
                     donor.phoneNumber = user.phoneNumber;
+                    if (donor.idBlood != 9)
+                        donor.idBlood = user.idBlood;
                     db.Donors.Add(donor);
 
                     var userDb = new AspNetUser();

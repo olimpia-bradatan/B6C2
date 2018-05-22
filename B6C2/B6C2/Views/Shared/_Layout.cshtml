@@ -20,11 +20,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @if (User.IsInRole("Donor"))
                     {
                         <li>@Html.ActionLink("Donate!", "CreateDonatingForm", "DonatingForm")</li>
                         <li>@Html.ActionLink("Donation status", "donorTransactionIndex", "donorTransaction")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("My details", "DonorIndex", "Donor")</li>
                     }
                     @if (User.IsInRole("Medic"))
                     {
@@ -35,6 +36,7 @@
                     @if (User.IsInRole("CentreEmployee"))
                     {
                         <li>@Html.ActionLink("View blood resource", "BloodResourceIndex", "BloodResource")</li>
+                        <li>@Html.ActionLink("Donors in this centre", "DonorIndex", "Donor")</li>
                         <li>@Html.ActionLink("Nearest donors", "DonationCenterIndex", "DonationCenter")</li>
                         <li>@Html.ActionLink("Donor transactions", "donorTransactionIndex", "donorTransaction")</li>
                         <li>@Html.ActionLink("Hospitals requests", "TransactionIndex", "Transaction")</li>

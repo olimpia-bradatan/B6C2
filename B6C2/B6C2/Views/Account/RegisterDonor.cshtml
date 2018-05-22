@@ -26,7 +26,7 @@
 
 
     <div class="form-group">
-        @Html.LabelFor(model => model.idBlood, "Blood", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.idBlood, "Blood group", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("idBlood", new List<SelectListItem>
                {
@@ -38,6 +38,7 @@
                 new SelectListItem { Text = "Group: B, Rh: -", Value = "6"},
                 new SelectListItem { Text = "Group: AB, Rh: +", Value = "7"},
                 new SelectListItem { Text = "Group: AB, Rh: -", Value = "8"},
+                new SelectListItem { Text = "I don't know it", Value = "9"},
                }, "Select Blood group and Rh")
             @Html.ValidationMessageFor(model => model.idBlood, "", new { @class = "text-danger" })
         </div>
