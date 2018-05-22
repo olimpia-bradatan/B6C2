@@ -4,7 +4,7 @@
     ViewBag.Title = "Details blood resource";
 }
 
-<h2>See details of blood resourse</h2>
+<h2>See details of blood resource</h2>
 
 <div>
     <hr />
@@ -23,6 +23,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.Blood.group)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Blood.RH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Blood.RH)
         </dd>
 
         <dt>
