@@ -11,16 +11,27 @@ namespace B6C2
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Transaction
     {
+        [Display(Name = "Transaction id")]
         public int idTransaction { get; set; }
+        [Required]
+        [RegularExpression("^(?!0+$)[0-9]+$", ErrorMessage = "Quantity must be positive")]
+        [Display(Name = "Blood quantity(ml)*")]
         public int quantity { get; set; }
+        [Display(Name = "Center id")]
         public int idCenter { get; set; }
+        [Display(Name = "Blood id")]
         public int idBlood { get; set; }
+        [Display(Name = "Hospital id")]
         public int idHospital { get; set; }
+        [Display(Name = "Patient id")]
         public Nullable<int> idPatient { get; set; }
+        [Display(Name = "Status")]
         public string status { get; set; }
+        [Display(Name = "Severity")]
         public string severity { get; set; }
     
         public virtual Blood Blood { get; set; }

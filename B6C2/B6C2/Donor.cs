@@ -11,7 +11,8 @@ namespace B6C2
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Donor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,15 +20,34 @@ namespace B6C2
         {
             this.donorTransactions = new HashSet<donorTransaction>();
         }
-    
+        [Required]
+        [Display(Name = "CNP*")]
+        [RegularExpression("^[0-9]{13}$", ErrorMessage = "CNP must contain 13 digits")]
         public string cnp { get; set; }
+        [Required]
+        [Display(Name = "First name*")]
         public string firstName { get; set; }
+        [Required]
+        [Display(Name = "Last name*")]
         public string lastName { get; set; }
+        [Required]
+        [Display(Name = "Birth date*")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime birthDate { get; set; }
+        [Required]
+        [Display(Name = "Address*")]
         public string address { get; set; }
+        [Required]
+        [Display(Name = "Email*")]
+        [DataType(DataType.EmailAddress)]
         public string email { get; set; }
+        [Required]
+        [Display(Name = "Phone number*")]
+        [DataType(DataType.PhoneNumber)]
         public string phoneNumber { get; set; }
+        [Display(Name = "Blood id")]
         public Nullable<int> idBlood { get; set; }
+        [Display(Name = "Centre id")]
         public Nullable<int> idCenter { get; set; }
     
         public virtual Blood Blood { get; set; }

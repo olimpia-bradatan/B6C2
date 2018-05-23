@@ -11,13 +11,25 @@ namespace B6C2
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class donorTransaction
     {
+        [Display(Name = "Transaction id")]
         public int id { get; set; }
+        [Required]
+        [Display(Name = "CNP*")]
+        [RegularExpression("^[0-9]{13}$", ErrorMessage = "CNP must contain 13 digits")]
         public string cnpDonor { get; set; }
+        [Required]
+        [Display(Name = "Status*")]
         public string status { get; set; }
+        [Required]
+        [Display(Name = "Donation date*")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> donationDate { get; set; }
+        
+        [Display(Name = "Analysis status")]
         public string analysisStatus { get; set; }
         public Nullable<int> idPatient { get; set; }
         public Nullable<int> idCenter { get; set; }

@@ -11,11 +11,17 @@ namespace B6C2
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class bloodResource
     {
+        [Required]
+        [RegularExpression("^(?!0+$)[0-9]+$", ErrorMessage = "Quantity must be positive")]
+        [Display(Name = "Blood quantity(ml)*")]
         public int quantity { get; set; }
+     
         public int idCenter { get; set; }
+    
         public int idBlood { get; set; }
     
         public virtual Blood Blood { get; set; }

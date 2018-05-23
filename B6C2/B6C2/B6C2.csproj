@@ -243,6 +243,7 @@
     <Compile Include="donorTransaction.cs">
       <DependentUpon>ISSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ErrorMessageAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

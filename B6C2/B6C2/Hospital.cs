@@ -11,7 +11,8 @@ namespace B6C2
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Hospital
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,9 +21,13 @@ namespace B6C2
             this.Medics = new HashSet<Medic>();
             this.Transactions = new HashSet<Transaction>();
         }
-    
+        [Display(Name = "Hospital id")]
         public int idHospital { get; set; }
+        [Display(Name = "Hospital name*")]
+        [Required]
         public string name { get; set; }
+        [Display(Name = "Address")]
+        [Required]
         public string address { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

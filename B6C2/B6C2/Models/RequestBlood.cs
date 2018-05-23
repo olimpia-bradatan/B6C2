@@ -9,7 +9,8 @@ namespace B6C2.Models
     public partial class RequestBlood
     {
         [Required]
-        [Display(Name = "Blood quantity*")]
+        [Display(Name = "Blood quantity(ml)*")]
+        [RegularExpression("^(?!0+$)[0-9]+$", ErrorMessage = "Quantity must be positive")]
 
         public int quantity { get; set; }
         [Required]
