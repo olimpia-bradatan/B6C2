@@ -77,7 +77,7 @@ namespace B6C2.Models
         public DateTime birthDate { get; set; }
 
         [Required]
-        [Display(Name = "Address", Description = "Number, Street, County, Zip Code, Country")]
+        [Display(Name = "Address, Format = Number, Street, County, Zip Code, Country")]
         public string address { get; set; }
 
         [Required]
